@@ -14,6 +14,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text('Home'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.settings),
+              onPressed: () => SettingsRoute().go(context),
+            ),
+            const SizedBox(width: 12),
+          ],
         ),
         body: SafeArea(
           child: ListView(

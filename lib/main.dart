@@ -8,10 +8,11 @@ import 'package:pub_packages/src/feature/initialization/controller/initializatio
 void main() => runZonedGuarded<Future<void>>(() async {
       WidgetsFlutterBinding.ensureInitialized();
       final controller = InitializationController();
-      await controller.initialize().last;
-      final result = controller.getResult();
-      print(result.packages);
-      runApp(const App());
+      await controller.initialize().drain<void>();
+      final repositoryStore = controller.getResult();
+      runApp(
+        App(repositoryStore: repositoryStore),
+      );
       // ignore: unnecessary_lambdas
     }, (error, stackTrace) {
       //Error.safeToString(error);

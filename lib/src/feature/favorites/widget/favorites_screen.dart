@@ -14,9 +14,9 @@ class FavoritesScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Favorites'),
         ),
-        body: const SafeArea(
-          child: Center(
-            child: Placeholder(),
+        body: SafeArea(
+          child: ListView(
+            children: const <Widget>[],
           ),
         ),
       );

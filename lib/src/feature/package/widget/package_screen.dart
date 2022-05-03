@@ -15,7 +15,7 @@ class PackageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Package'),
+          title: Text(name),
         ),
         body: const SafeArea(
           child: Center(
