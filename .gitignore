@@ -1,0 +1,132 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+.vscode/
+.vs/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+**/build/
+pubspec.lock
+
+# Web related
+client/lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Codegen
+client/**.g.dart
+client/**.g.java
+client/**.g.kt
+client/**.freezed.dart
+client/**.gen.dart
+client/**.moor.dart
+client/**.mocks.dart
+client/**.hive.dart
+client/lib/src/common/localization/l10n.dart
+client/lib/src/common/localization/intl/messages_??.dart
+client/lib/src/common/localization/intl/messages_???.dart
+
+# Database
+client/**.db
+client/**.sqlite
+client/**.hive
+client/**.lock
+
+# Logs
+client/logs/
+client/coverage/
+
+# Firebase
+#.firebase/
+
+client/android/keystore.properties
+client/android/keystore.p12
+client/android/keystore.pfx
+client/android/keystore.jks
+
+# SKSL shaders warm-up
+*.sksl.json
+
+*.env
+
+# GraphQL
+.graphqlconfig
+
+
+# c-sharp
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+#Folders
+obj/*
+obj/
+*/.vs/*
+#other
+bin/
+Logs/
+*.cache
+*.assets.cache
+
+.vs/*
+/server/jwt_validator_firebase/.vs/*
+/server/jwt_validator_firebase/JwtValidatorFirebase/dart-job-jwt-validator-firebase.json

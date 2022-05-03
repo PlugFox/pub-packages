@@ -1,0 +1,27 @@
+name: pub_packages
+description: Pub Packages
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: '>=2.18.0-78.0.dev <3.0.0'
+  flutter: '>=2.13.0-0.0.pre.868'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.1.10
+  grinder: ^0.9.1
+  path: ^1.8.1
+  go_router_builder: ^1.0.1
+  pub_api_client: ^2.2.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/packages.json
