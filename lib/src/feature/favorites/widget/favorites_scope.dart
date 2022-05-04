@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:l/l.dart';
@@ -106,12 +107,23 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
   Future<bool> togglePackageState(String packageName) {
     final list = _sharedPreferences.getStringList(_kFavorites) ?? <String>[];
     final bool isFavorite;
+    final analyticsEventItem = AnalyticsEventItem(
+      itemId: packageName,
+      itemName: packageName,
+      itemBrand: 'PlugFox',
+    );
     if (list.contains(packageName)) {
       list.remove(packageName);
       isFavorite = false;
+      FirebaseAnalytics.instance.logRemoveFromCart(
+        items: <AnalyticsEventItem>[analyticsEventItem],
+      );
     } else {
       list.add(packageName);
       isFavorite = true;
+      FirebaseAnalytics.instance.logAddToCart(
+        items: <AnalyticsEventItem>[analyticsEventItem],
+      );
     }
     _remoteFavorites?.set(<String, Object?>{'packages': list});
     return _sharedPreferences.setStringList(_kFavorites, list).then<bool>((_) {
