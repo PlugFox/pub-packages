@@ -4,6 +4,8 @@ import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:pub_packages/src/feature/package/model/version.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
 
+import 'package:url_launcher/url_launcher.dart' as launcher;
+
 final DateFormat _dateFormater = DateFormat.yMMMEd();
 
 /// {@template version_screen.version_screen}
@@ -61,15 +63,38 @@ class VersionScreen extends StatelessWidget {
                 ),
               ),
               SliverFixedExtentList(
-                itemExtent: 24,
+                itemExtent: 32,
                 delegate: SliverChildListDelegate.fixed(
-                  <String?>[version.pubspec.homepage, version.pubspec.repository, version.pubspec.issueTracker]
+                  <String?>[
+                    version.pubspec.homepage,
+                    version.pubspec.repository,
+                    version.pubspec.issueTracker,
+                    version.archiveUrl,
+                  ]
                       .whereType<String>()
                       .map<Widget>(Text.new)
                       .map<Widget>((e) => Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: e))
                       .toList(growable: false),
                 ),
-              )
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 14,
+                    top: 16,
+                    right: 14,
+                    bottom: 12,
+                  ),
+                  child: Center(
+                    child: ElevatedButton(
+                      onPressed: () => launcher.launchUrl(
+                        Uri.parse('https://pub.dev/packages/${package.name}/versions/${version.version}'),
+                      ),
+                      child: const Text('Open on pub.dev'),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

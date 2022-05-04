@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:pub_packages/src/feature/favorites/widget/favorite_button.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
 import 'package:pub_packages/src/feature/package/widget/package_versions.dart';
+
+import 'package:url_launcher/url_launcher.dart' as launcher;
 
 /// {@template package_info.package_info}
 /// PackageInfo widget
@@ -57,6 +60,14 @@ class _PackageInfoHeader extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Text(PackageScope.of(context).latest.pubspec.description ?? ''),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => launcher.launchUrl(
+                    Uri.parse('https://pub.dev/packages/${PackageScope.of(context).name}'),
+                  ),
+                  child: const Text('Open on pub.dev'),
+                ),
+              ),
             ],
           ),
         ),
