@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:l/l.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 

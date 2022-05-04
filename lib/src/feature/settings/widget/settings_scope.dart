@@ -1,7 +1,10 @@
 import 'dart:ui' as ui;
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:l/l.dart';
+import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,6 +59,7 @@ class SettingsScope extends StatefulWidget {
 class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeController {
   static const String _kThemeKey = 'theme';
   late final SharedPreferences _sharedPreferences;
+  late final DocumentReference<Map<String, Object?>>? _remoteSettings;
   final ValueNotifier<ThemeData> _themeNotifier = ValueNotifier<ThemeData>(ThemeData.light());
 
   @override
@@ -66,6 +70,22 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
   void initState() {
     super.initState();
     _sharedPreferences = RepositoryScope.of(context).sharedPreferences;
+    final uid = AuthenticationScope.of(context).user?.uid;
+    if (uid != null) {
+      _remoteSettings = FirebaseFirestore.instance.collection('users').doc(uid).collection('settings').doc('latest')
+        ..get().then<void>(
+          (value) {
+            if (!value.exists) return;
+            final theme = value.data()?[_kThemeKey] as bool?;
+            if (theme == null) return;
+            theme ? setLightTheme() : setDarkTheme();
+            l.i('Settings restored from firestore');
+          },
+          onError: l.w,
+        );
+    } else {
+      _remoteSettings = null;
+    }
     _restoreTheme();
   }
 
@@ -84,6 +104,7 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
   void _setTheme(ThemeData themeData) {
     _sharedPreferences.setBool(_kThemeKey, themeData.brightness == Brightness.light);
     _themeNotifier.value = themeData;
+    _remoteSettings?.set(<String, Object?>{_kThemeKey: themeData.brightness == Brightness.light});
   }
 
   @override

@@ -25,6 +25,7 @@ dependencies:
   firebase_core: ^1.16.0
   firebase_analytics: ^9.1.7
   firebase_auth: ^3.3.17
+  cloud_firestore: ^3.1.14
   flutterfire_ui: ^0.4.0+5
 
 dev_dependencies:

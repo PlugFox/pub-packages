@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:l/l.dart';
+import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,6 +60,7 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
   static const String _kFavorites = 'favorites';
   late final List<Package> _packages;
   late final SharedPreferences _sharedPreferences;
+  late final DocumentReference<Map<String, Object?>>? _remoteFavorites;
   final ValueNotifier<List<Package>> _notifier = ValueNotifier<List<Package>>(<Package>[]);
 
   /* #region Lifecycle */
@@ -65,6 +69,22 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
     super.initState();
     _sharedPreferences = RepositoryScope.of(context).sharedPreferences;
     _packages = RepositoryScope.of(context).packages;
+    final uid = AuthenticationScope.of(context).user?.uid;
+    if (uid != null) {
+      _remoteFavorites = FirebaseFirestore.instance.collection('users').doc(uid).collection(_kFavorites).doc('latest')
+        ..get().then<void>(
+          (value) {
+            if (!value.exists) return;
+            final list = (value.data()?['packages'] as List<Object?>?)?.whereType<String>().toList(growable: false);
+            if (list == null) return;
+            _sharedPreferences.setStringList(_kFavorites, list).whenComplete(_updateNotifier);
+            l.i('Favorites restored from firestore');
+          },
+          onError: l.w,
+        );
+    } else {
+      _remoteFavorites = null;
+    }
     _updateNotifier();
   }
 
@@ -93,6 +113,7 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
       list.add(packageName);
       isFavorite = true;
     }
+    _remoteFavorites?.set(<String, Object?>{'packages': list});
     return _sharedPreferences.setStringList(_kFavorites, list).then<bool>((_) {
       _updateNotifier();
       return isFavorite;

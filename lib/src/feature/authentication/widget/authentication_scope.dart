@@ -12,8 +12,6 @@ abstract class AuthenticationScopeController {
   abstract final ValueListenable<User?> authenticationNotifier;
   abstract final User? user;
   abstract final bool loggedIn;
-  void login();
-  void logout();
 } // IAuthenticationScopeController
 
 /// {@template authentication_scope.authentication_scope}
@@ -91,12 +89,6 @@ class _AuthenticationScopeState extends State<AuthenticationScope> implements Au
     super.dispose();
   }
   /* #endregion */
-
-  @override
-  void login() {}
-
-  @override
-  void logout() {}
 
   @override
   Widget build(BuildContext context) => _InheritedAuthenticationScope(
