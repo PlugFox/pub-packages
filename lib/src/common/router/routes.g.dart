@@ -26,18 +26,18 @@ GoRoute get $homeRoute => GoRouteData.$route(
             GoRouteData.$route(
               path: 'package/:name',
               factory: $PackageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'version/:version',
+                  factory: $VersionRouteExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
         GoRouteData.$route(
           path: 'favorites',
           factory: $FavoritesRouteExtension._fromState,
-          routes: [
-            GoRouteData.$route(
-              path: 'favorite/:name',
-              factory: $FavoriteRouteExtension._fromState,
-            ),
-          ],
         ),
       ],
     );
@@ -84,23 +84,24 @@ extension $PackageRouteExtension on PackageRoute {
   void go(BuildContext buildContext) => buildContext.go(location, extra: this);
 }
 
-extension $FavoritesRouteExtension on FavoritesRoute {
-  static FavoritesRoute _fromState(GoRouterState state) => FavoritesRoute();
+extension $VersionRouteExtension on VersionRoute {
+  static VersionRoute _fromState(GoRouterState state) => VersionRoute(
+        name: state.params['name']!,
+        version: state.params['version']!,
+      );
 
   String get location => GoRouteData.$location(
-        '/favorites',
+        '/packages/package/${Uri.encodeComponent(name)}/version/${Uri.encodeComponent(version)}',
       );
 
   void go(BuildContext buildContext) => buildContext.go(location, extra: this);
 }
 
-extension $FavoriteRouteExtension on FavoriteRoute {
-  static FavoriteRoute _fromState(GoRouterState state) => FavoriteRoute(
-        name: state.params['name']!,
-      );
+extension $FavoritesRouteExtension on FavoritesRoute {
+  static FavoritesRoute _fromState(GoRouterState state) => FavoritesRoute();
 
   String get location => GoRouteData.$location(
-        '/favorites/favorite/${Uri.encodeComponent(name)}',
+        '/favorites',
       );
 
   void go(BuildContext buildContext) => buildContext.go(location, extra: this);

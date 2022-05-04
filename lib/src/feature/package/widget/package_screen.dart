@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pub_packages/src/feature/package/model/package.dart';
+import 'package:pub_packages/src/feature/package/widget/package_info.dart';
+import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
 
 /// {@template library_screen.library_screen}
 /// LibraryScreen widget
@@ -6,21 +9,17 @@ import 'package:flutter/material.dart';
 class PackageScreen extends StatelessWidget {
   /// {@macro library_screen.library_screen}
   const PackageScreen({
-    required this.name,
+    required this.package,
     Key? key,
   }) : super(key: key);
 
-  final String name;
+  final Package package;
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(name),
-        ),
-        body: const SafeArea(
-          child: Center(
-            child: Placeholder(),
-          ),
+  Widget build(BuildContext context) => PackageScope(
+        package: package,
+        child: const Scaffold(
+          body: PackageInfo(),
         ),
       );
 } // LibraryScreen

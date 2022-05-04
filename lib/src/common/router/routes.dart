@@ -1,11 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_screen.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorites_screen.dart';
 import 'package:pub_packages/src/feature/home/widget/home_screen.dart';
+import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:pub_packages/src/feature/not_found/widget/not_found_screen.dart';
 import 'package:pub_packages/src/feature/package/widget/package_screen.dart';
+import 'package:pub_packages/src/feature/package/widget/version_screen.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_screen.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_screen.dart';
 
@@ -23,16 +26,16 @@ part 'routes.g.dart';
       routes: <TypedGoRoute<GoRouteData>>[
         TypedGoRoute<PackageRoute>(
           path: 'package/:name',
+          routes: <TypedGoRoute<GoRouteData>>[
+            TypedGoRoute<VersionRoute>(
+              path: 'version/:version',
+            ),
+          ],
         ),
       ],
     ),
     TypedGoRoute<FavoritesRoute>(
       path: 'favorites',
-      routes: <TypedGoRoute<GoRouteData>>[
-        TypedGoRoute<FavoriteRoute>(
-          path: 'favorite/:name',
-        ),
-      ],
     ),
   ],
 )
@@ -69,7 +72,30 @@ class PackageRoute extends GoRouteData {
   final String name;
 
   @override
-  Widget build(BuildContext context) => PackageScreen(name: name);
+  Widget build(BuildContext context) {
+    final package = RepositoryScope.of(context).packages.firstWhereOrNull((e) => e.name == name);
+    if (package == null) {
+      return const NotFoundScreen();
+    }
+    return PackageScreen(package: package);
+  }
+}
+
+/// VersionRoute
+@internal
+class VersionRoute extends GoRouteData {
+  VersionRoute({required this.name, required this.version});
+
+  final String name;
+  final String version;
+
+  @override
+  Widget build(BuildContext context) {
+    final pck = RepositoryScope.of(context).packages.firstWhereOrNull((e) => e.name == name);
+    final ver = pck?.versions.firstWhereOrNull((e) => e.version == version);
+    if (pck == null || ver == null) return const NotFoundScreen();
+    return VersionScreen(package: pck, version: ver);
+  }
 }
 
 /// FavoritesRoute
@@ -79,17 +105,6 @@ class FavoritesRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context) => const FavoritesScreen();
-}
-
-/// FavoriteRoute
-@internal
-class FavoriteRoute extends GoRouteData {
-  FavoriteRoute({required this.name});
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context) => PackageScreen(name: name);
 }
 
 /// SettingsRoute

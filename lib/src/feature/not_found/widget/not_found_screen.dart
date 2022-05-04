@@ -17,6 +17,7 @@ class NotFoundScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text('Not Found'),
+          centerTitle: true,
         ),
         body: SafeArea(
           child: Center(

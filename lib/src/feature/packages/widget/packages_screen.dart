@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pub_packages/src/common/router/routes.dart';
 import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
+import 'package:pub_packages/src/feature/packages/widget/packages_list_view.dart';
 
 /// {@template packages_screen.packages_screen}
 /// PackagesScreen widget
@@ -15,22 +15,12 @@ class PackagesScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text('Packages'),
+          centerTitle: true,
         ),
         body: SafeArea(
           child: Center(
-            child: Builder(
-              builder: (context) {
-                final repositoryStore = RepositoryScope.of(context);
-                final packages = repositoryStore.packages;
-                return ListView.separated(
-                  itemCount: packages.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(packages[index].name ?? 'Unknown'),
-                    onTap: () => PackageRoute(name: packages[index].name ?? 'Unknown').go(context),
-                  ),
-                );
-              },
+            child: PackagesListView(
+              packages: RepositoryScope.of(context).packages,
             ),
           ),
         ),

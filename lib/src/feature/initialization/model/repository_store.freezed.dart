@@ -20,6 +20,10 @@ mixin _$InitializationProgress {
   set message(String value) => throw _privateConstructorUsedError;
   int get progress => throw _privateConstructorUsedError;
   set progress(int value) => throw _privateConstructorUsedError;
+  SharedPreferences? get sharedPreferences =>
+      throw _privateConstructorUsedError;
+  set sharedPreferences(SharedPreferences? value) =>
+      throw _privateConstructorUsedError;
   List<Package>? get packages => throw _privateConstructorUsedError;
   set packages(List<Package>? value) => throw _privateConstructorUsedError;
 
@@ -33,7 +37,11 @@ abstract class $InitializationProgressCopyWith<$Res> {
   factory $InitializationProgressCopyWith(InitializationProgress value,
           $Res Function(InitializationProgress) then) =
       _$InitializationProgressCopyWithImpl<$Res>;
-  $Res call({String message, int progress, List<Package>? packages});
+  $Res call(
+      {String message,
+      int progress,
+      SharedPreferences? sharedPreferences,
+      List<Package>? packages});
 }
 
 /// @nodoc
@@ -49,6 +57,7 @@ class _$InitializationProgressCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
     Object? progress = freezed,
+    Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +69,10 @@ class _$InitializationProgressCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
+      sharedPreferences: sharedPreferences == freezed
+          ? _value.sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as SharedPreferences?,
       packages: packages == freezed
           ? _value.packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -75,7 +88,11 @@ abstract class _$InitializationProgressCopyWith<$Res>
           $Res Function(_InitializationProgress) then) =
       __$InitializationProgressCopyWithImpl<$Res>;
   @override
-  $Res call({String message, int progress, List<Package>? packages});
+  $Res call(
+      {String message,
+      int progress,
+      SharedPreferences? sharedPreferences,
+      List<Package>? packages});
 }
 
 /// @nodoc
@@ -93,6 +110,7 @@ class __$InitializationProgressCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
     Object? progress = freezed,
+    Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
     return _then(_InitializationProgress(
@@ -104,6 +122,10 @@ class __$InitializationProgressCopyWithImpl<$Res>
           ? _value.progress
           : progress // ignore: cast_nullable_to_non_nullable
               as int,
+      sharedPreferences: sharedPreferences == freezed
+          ? _value.sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as SharedPreferences?,
       packages: packages == freezed
           ? _value.packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -116,7 +138,10 @@ class __$InitializationProgressCopyWithImpl<$Res>
 
 class _$_InitializationProgress extends _InitializationProgress {
   _$_InitializationProgress(
-      {this.message = 'Not initialized', this.progress = 0, this.packages})
+      {this.message = 'Not initialized',
+      this.progress = 0,
+      this.sharedPreferences,
+      this.packages})
       : super._();
 
   @override
@@ -126,11 +151,13 @@ class _$_InitializationProgress extends _InitializationProgress {
   @JsonKey()
   int progress;
   @override
+  SharedPreferences? sharedPreferences;
+  @override
   List<Package>? packages;
 
   @override
   String toString() {
-    return 'InitializationProgress(message: $message, progress: $progress, packages: $packages)';
+    return 'InitializationProgress(message: $message, progress: $progress, sharedPreferences: $sharedPreferences, packages: $packages)';
   }
 
   @JsonKey(ignore: true)
@@ -144,6 +171,7 @@ abstract class _InitializationProgress extends InitializationProgress {
   factory _InitializationProgress(
       {String message,
       int progress,
+      SharedPreferences? sharedPreferences,
       List<Package>? packages}) = _$_InitializationProgress;
   _InitializationProgress._() : super._();
 
@@ -151,6 +179,9 @@ abstract class _InitializationProgress extends InitializationProgress {
   String get message => throw _privateConstructorUsedError;
   @override
   int get progress => throw _privateConstructorUsedError;
+  @override
+  SharedPreferences? get sharedPreferences =>
+      throw _privateConstructorUsedError;
   @override
   List<Package>? get packages => throw _privateConstructorUsedError;
   @override
@@ -161,6 +192,7 @@ abstract class _InitializationProgress extends InitializationProgress {
 
 /// @nodoc
 mixin _$RepositoryStore {
+  SharedPreferences get sharedPreferences => throw _privateConstructorUsedError;
   List<Package> get packages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -173,7 +205,7 @@ abstract class $RepositoryStoreCopyWith<$Res> {
   factory $RepositoryStoreCopyWith(
           RepositoryStore value, $Res Function(RepositoryStore) then) =
       _$RepositoryStoreCopyWithImpl<$Res>;
-  $Res call({List<Package> packages});
+  $Res call({SharedPreferences sharedPreferences, List<Package> packages});
 }
 
 /// @nodoc
@@ -187,9 +219,14 @@ class _$RepositoryStoreCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
     return _then(_value.copyWith(
+      sharedPreferences: sharedPreferences == freezed
+          ? _value.sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as SharedPreferences,
       packages: packages == freezed
           ? _value.packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -205,7 +242,7 @@ abstract class _$RepositoryStoreCopyWith<$Res>
           _RepositoryStore value, $Res Function(_RepositoryStore) then) =
       __$RepositoryStoreCopyWithImpl<$Res>;
   @override
-  $Res call({List<Package> packages});
+  $Res call({SharedPreferences sharedPreferences, List<Package> packages});
 }
 
 /// @nodoc
@@ -221,9 +258,14 @@ class __$RepositoryStoreCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
     return _then(_RepositoryStore(
+      sharedPreferences: sharedPreferences == freezed
+          ? _value.sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as SharedPreferences,
       packages: packages == freezed
           ? _value.packages
           : packages // ignore: cast_nullable_to_non_nullable
@@ -235,9 +277,12 @@ class __$RepositoryStoreCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RepositoryStore implements _RepositoryStore {
-  _$_RepositoryStore({required final List<Package> packages})
+  _$_RepositoryStore(
+      {required this.sharedPreferences, required final List<Package> packages})
       : _packages = packages;
 
+  @override
+  final SharedPreferences sharedPreferences;
   final List<Package> _packages;
   @override
   List<Package> get packages {
@@ -247,7 +292,7 @@ class _$_RepositoryStore implements _RepositoryStore {
 
   @override
   String toString() {
-    return 'RepositoryStore(packages: $packages)';
+    return 'RepositoryStore(sharedPreferences: $sharedPreferences, packages: $packages)';
   }
 
   @override
@@ -255,12 +300,16 @@ class _$_RepositoryStore implements _RepositoryStore {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _RepositoryStore &&
+            const DeepCollectionEquality()
+                .equals(other.sharedPreferences, sharedPreferences) &&
             const DeepCollectionEquality().equals(other.packages, packages));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(packages));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(sharedPreferences),
+      const DeepCollectionEquality().hash(packages));
 
   @JsonKey(ignore: true)
   @override
@@ -269,9 +318,12 @@ class _$_RepositoryStore implements _RepositoryStore {
 }
 
 abstract class _RepositoryStore implements RepositoryStore {
-  factory _RepositoryStore({required final List<Package> packages}) =
-      _$_RepositoryStore;
+  factory _RepositoryStore(
+      {required final SharedPreferences sharedPreferences,
+      required final List<Package> packages}) = _$_RepositoryStore;
 
+  @override
+  SharedPreferences get sharedPreferences => throw _privateConstructorUsedError;
   @override
   List<Package> get packages => throw _privateConstructorUsedError;
   @override

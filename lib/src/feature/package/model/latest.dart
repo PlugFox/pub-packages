@@ -2,52 +2,31 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
-import 'package:pub_packages/src/feature/package/model/pubspec.dart';
+import 'package:pub_packages/src/feature/package/model/version.dart';
 
 @immutable
-class Latest {
-  final String? version;
-  final Pubspec? pubspec;
-  final String? archiveUrl;
-  final String? published;
-
+class Latest extends Version {
   const Latest({
-    this.version,
-    this.pubspec,
-    this.archiveUrl,
-    this.published,
+    required super.version,
+    required super.pubspec,
+    required super.archiveUrl,
+    required super.published,
   });
 
   @override
-  String toString() =>
-      'Latest(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
+  String toString() => 'Latest(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
 
-  factory Latest.fromMap(Map<String, dynamic> data) => Latest(
-        version: data['version'] as String?,
-        pubspec: data['pubspec'] == null
-            ? null
-            : Pubspec.fromMap(data['pubspec'] as Map<String, dynamic>),
-        archiveUrl: data['archive_url'] as String?,
-        published: data['published'] as String?,
-      );
+  factory Latest.fromMap(Map<String, dynamic> data) {
+    final version = Version.fromMap(data);
+    return Latest(
+      version: version.version,
+      pubspec: version.pubspec,
+      archiveUrl: version.archiveUrl,
+      published: version.published,
+    );
+  }
 
-  Map<String, Object?> toMap() => <String, Object?>{
-        'version': version,
-        'pubspec': pubspec?.toMap(),
-        'archive_url': archiveUrl,
-        'published': published,
-      };
-
-  /// `dart:convert`
-  ///
-  /// Parses the string and returns the resulting Json object as [Latest].
-  factory Latest.fromJson(String data) =>
-      Latest.fromMap(json.decode(data) as Map<String, dynamic>);
-
-  /// `dart:convert`
-  ///
-  /// Converts [Latest] to a JSON string.
-  String toJson() => json.encode(toMap());
+  factory Latest.fromJson(String data) => Latest.fromMap(json.decode(data) as Map<String, Object?>);
 
   @override
   bool operator ==(Object other) {
@@ -58,9 +37,5 @@ class Latest {
   }
 
   @override
-  int get hashCode =>
-      version.hashCode ^
-      pubspec.hashCode ^
-      archiveUrl.hashCode ^
-      published.hashCode;
+  int get hashCode => version.hashCode ^ pubspec.hashCode ^ archiveUrl.hashCode ^ published.hashCode;
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pub_packages/src/feature/initialization/model/repository_store.dart';
 import 'package:pub_packages/src/feature/packages/data/get_packages.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template initialization_controller.initialization_controller}
 /// InitializationController class
@@ -56,6 +57,10 @@ class InitializationController with ChangeNotifier {
 typedef InitializationStep = FutureOr<InitializationProgress> Function(InitializationProgress progress);
 
 final Map<String, InitializationStep> _initializationSteps = <String, InitializationStep>{
+  'Local storage initializing': (progress) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    return progress..sharedPreferences = sharedPreferences;
+  },
   'Get packages': (final progress) async {
     final packages = await getPackagesFromAssets();
     return progress..packages = packages;

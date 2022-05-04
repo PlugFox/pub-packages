@@ -7,25 +7,32 @@ import 'package:pub_packages/src/feature/package/model/version.dart';
 
 @immutable
 class Package {
-  final String? name;
-  final Latest? latest;
-  final List<Version>? versions;
+  final String name;
+  final Latest latest;
+  final List<Version> versions;
 
-  const Package({this.name, this.latest, this.versions});
+  const Package({
+    required this.name,
+    required this.latest,
+    required this.versions,
+  });
 
   @override
   String toString() => 'Package(name: $name, latest: $latest, versions: $versions)';
 
   factory Package.fromMap(Map<String, Object?> data) => Package(
-        name: data['name'] as String?,
-        latest: data['latest'] == null ? null : Latest.fromMap(data['latest']! as Map<String, Object?>),
-        versions: (data['versions'] as List<Object?>?)?.cast<Map<String, Object?>>().map(Version.fromMap).toList(),
+        name: data['name']! as String,
+        latest: Latest.fromMap(data['latest']! as Map<String, Object?>),
+        versions: (data['versions']! as Iterable<Object?>)
+            .cast<Map<String, Object?>>()
+            .map<Version>(Version.fromMap)
+            .toList(growable: false),
       );
 
   Map<String, Object?> toMap() => <String, Object?>{
         'name': name,
-        'latest': latest?.toMap(),
-        'versions': versions?.map((e) => e.toMap()).toList(),
+        'latest': latest.toMap(),
+        'versions': versions.map((e) => e.toMap()).toList(),
       };
 
   /// `dart:convert`

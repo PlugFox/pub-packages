@@ -25,9 +25,7 @@ class AppRouter extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `AppRouter.maybeOf(context)`
   static IAppRouterController? maybeOf(BuildContext context) {
-    final inhW = context
-        .getElementForInheritedWidgetOfExactType<_InheritedAppRouter>()
-        ?.widget;
+    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedAppRouter>()?.widget;
     return inhW is _InheritedAppRouter ? inhW.controller : null;
   }
 
@@ -40,8 +38,7 @@ class AppRouter extends StatefulWidget {
   /// The state from the closest instance of this class
   /// that encloses the given context.
   /// e.g. `AppRouter.of(context)`
-  static IAppRouterController of(BuildContext context) =>
-      maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
+  static IAppRouterController of(BuildContext context) => maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
   State<AppRouter> createState() => _AppRouterState();
@@ -57,15 +54,22 @@ class _AppRouterState extends State<AppRouter> with AppRouterController {
 } // _AppRouterState
 
 /// Controller for widget AppRouter
-mixin AppRouterController implements IAppRouterController {
+mixin AppRouterController on State<AppRouter> implements IAppRouterController {
   @override
-  final GoRouter router = GoRouter(
-    initialLocation: const HomeRoute().location,
-    routes: $appRoutes,
-    errorBuilder: (context, state) =>
-        NotFoundRoute(exception: state.error).build(context),
-    //redirect: (state) => ,
-  );
+  void initState() {
+    super.initState();
+    //final repositoryStore = RepositoryScope.of(context);
+    router = GoRouter(
+      initialLocation: const HomeRoute().location,
+      //redirect: (state) {},
+      routes: $appRoutes,
+      errorBuilder: (context, state) => NotFoundRoute(exception: state.error).build(context),
+      //redirect: (state) => ,
+    );
+  }
+
+  @override
+  late final GoRouter router;
 } // AppRouterController
 
 /// {@template app_router.inherited_app_router}

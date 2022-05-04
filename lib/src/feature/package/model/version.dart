@@ -6,43 +6,39 @@ import 'package:pub_packages/src/feature/package/model/pubspec.dart';
 
 @immutable
 class Version {
-  final String? version;
-  final Pubspec? pubspec;
-  final String? archiveUrl;
-  final String? published;
-
   const Version({
-    this.version,
-    this.pubspec,
-    this.archiveUrl,
-    this.published,
+    required this.version,
+    required this.pubspec,
+    required this.archiveUrl,
+    required this.published,
   });
 
+  final String version;
+  final Pubspec pubspec;
+  final String archiveUrl;
+  final DateTime published;
+
   @override
-  String toString() =>
-      'Version(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
+  String toString() => 'Version(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
 
   factory Version.fromMap(Map<String, dynamic> data) => Version(
-        version: data['version'] as String?,
-        pubspec: data['pubspec'] == null
-            ? null
-            : Pubspec.fromMap(data['pubspec'] as Map<String, dynamic>),
-        archiveUrl: data['archive_url'] as String?,
-        published: data['published'] as String?,
+        version: data['version']! as String,
+        pubspec: Pubspec.fromMap(data['pubspec']! as Map<String, Object?>),
+        archiveUrl: data['archive_url']! as String,
+        published: DateTime.parse(data['published']! as String).toLocal(),
       );
 
   Map<String, Object?> toMap() => <String, Object?>{
         'version': version,
-        'pubspec': pubspec?.toMap(),
+        'pubspec': pubspec.toMap(),
         'archive_url': archiveUrl,
-        'published': published,
+        'published': published.toUtc().toIso8601String(),
       };
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Version].
-  factory Version.fromJson(String data) =>
-      Version.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Version.fromJson(String data) => Version.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///
@@ -58,9 +54,5 @@ class Version {
   }
 
   @override
-  int get hashCode =>
-      version.hashCode ^
-      pubspec.hashCode ^
-      archiveUrl.hashCode ^
-      published.hashCode;
+  int get hashCode => version.hashCode ^ pubspec.hashCode ^ archiveUrl.hashCode ^ published.hashCode;
 }

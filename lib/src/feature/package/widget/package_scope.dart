@@ -39,5 +39,5 @@ class PackageScope extends InheritedWidget {
       maybeOf(context, listen: listen) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
-  bool updateShouldNotify(PackageScope oldWidget) => false;
+  bool updateShouldNotify(PackageScope oldWidget) => package.name != oldWidget.package.name;
 } // PackageScope
