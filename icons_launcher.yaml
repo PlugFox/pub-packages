@@ -1,0 +1,20 @@
+# Generate app icon
+# flutter pub run icons_launcher:main
+flutter_icons:
+  #image_path: 'assets/icon/1x/icon.png'
+  image_path_android: 'assets/icon/1x/icon.png' # "assets/icon/icon-1024x1024.png"
+  image_path_ios: 'assets/icon/1x/icon.png' # "assets/icon/icon-1024x1024.png"
+  image_path_web: 'assets/icon/1x/icon.png' # "assets/icon/icon-1024x1024.png"
+  #image_path_macos: 'assets/icon/icon-710x599.png'
+  #image_path_windows: 'assets/icon/icon-710x599.png'
+  #image_path_linux: 'assets/icon/icon-710x599.png'
+  #adaptive_icon_background: "assets/icon/christmas-background.png"
+  #adaptive_icon_foreground: "assets/icon/icon-foreground-432x432.png"
+  android: true
+  ios: true
+  web: true
+  #remove_alpha_ios: true
+  #macos: true
+  #remove_alpha_macos: true
+  #windows: true
+  #linux: true

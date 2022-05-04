@@ -2,6 +2,10 @@
 
 analyzer:
   exclude:
+    # Codegen
+    - 'lib/**.gen.dart'
+    - 'lib/**.g.dart'
+    - 'lib/**.freezed.dart'
     # Build
     - 'build/**'
     # Tests
