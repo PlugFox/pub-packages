@@ -10,6 +10,7 @@ import 'package:pub_packages/src/feature/not_found/widget/not_found_screen.dart'
 import 'package:pub_packages/src/feature/package/widget/package_screen.dart';
 import 'package:pub_packages/src/feature/package/widget/version_screen.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_screen.dart';
+import 'package:pub_packages/src/feature/profile/widget/profile_screen.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_screen.dart';
 
 part 'routes.g.dart';
@@ -20,6 +21,9 @@ part 'routes.g.dart';
   routes: <TypedGoRoute<GoRouteData>>[
     TypedGoRoute<SettingsRoute>(
       path: 'settings',
+    ),
+    TypedGoRoute<ProfileRoute>(
+      path: 'profile',
     ),
     TypedGoRoute<PackagesRoute>(
       path: 'packages',
@@ -116,7 +120,17 @@ class SettingsRoute extends GoRouteData {
   Widget build(BuildContext context) => const SettingsScreen();
 }
 
+/// ProfileRoute
+@internal
+class ProfileRoute extends GoRouteData {
+  ProfileRoute();
+
+  @override
+  Widget build(BuildContext context) => const ProfileScreen();
+}
+
 /// NotFoundRoute
+@internal
 class NotFoundRoute extends GoRouteData {
   NotFoundRoute({this.exception});
 

@@ -1,6 +1,9 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:l/l.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
+import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 
 /// App router controller
 abstract class IAppRouterController {
@@ -59,12 +62,34 @@ mixin AppRouterController on State<AppRouter> implements IAppRouterController {
   void initState() {
     super.initState();
     //final repositoryStore = RepositoryScope.of(context);
+    final authController = AuthenticationScope.of(context);
     router = GoRouter(
+      restorationScopeId: 'go_router',
       initialLocation: const HomeRoute().location,
-      //redirect: (state) {},
+      refreshListenable: authController.authenticationNotifier,
+      redirect: (state) {
+        // if the user is not logged in, they need to login
+        final loggedIn = authController.loggedIn;
+        final loggingIn = state.subloc == '/authentication';
+
+        // bundle the location the user is coming from into a query parameter
+        final fromp = state.subloc == '/' ? '' : '?from=${state.subloc}';
+
+        if (!loggedIn) return loggingIn ? null : '/authentication$fromp';
+
+        // if the user is logged in, send them where they were going before (or
+        // home if they weren't going anywhere)
+        if (loggingIn) return state.queryParams['from'] ?? '/';
+
+        // no need to redirect at all
+        return null;
+      },
       routes: $appRoutes,
       errorBuilder: (context, state) => NotFoundRoute(exception: state.error).build(context),
       //redirect: (state) => ,
+      observers: <NavigatorObserver>[
+        FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+      ],
     );
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pub_packages/src/common/router/app_router.dart';
 import 'package:pub_packages/src/common/widget/material_context.dart';
+import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorites_scope.dart';
 import 'package:pub_packages/src/feature/initialization/model/repository_store.dart';
 import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
@@ -22,10 +23,12 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) => RepositoryScope(
         repositoryStore: _repositoryStore,
-        child: const SettingsScope(
-          child: FavoritesScope(
-            child: AppRouter(
-              child: MaterialContext(),
+        child: const AuthenticationScope(
+          child: SettingsScope(
+            child: FavoritesScope(
+              child: AppRouter(
+                child: MaterialContext(),
+              ),
             ),
           ),
         ),

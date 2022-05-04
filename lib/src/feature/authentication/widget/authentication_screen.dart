@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterfire_ui/auth.dart';
 
 /// {@template authentication_screen.authentication_screen}
 /// AuthenticationScreen widget
@@ -10,14 +12,13 @@ class AuthenticationScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text('Authentication'),
-        ),
-        body: const SafeArea(
-          child: Center(
-            child: Placeholder(),
+  Widget build(BuildContext context) => SignInScreen(
+        auth: FirebaseAuth.instance,
+        showAuthActionSwitch: false,
+        providerConfigs: const <ProviderConfiguration>[
+          GoogleProviderConfiguration(
+            clientId: '789908936604-5q9bp96ecv8bhe8pr8rcjuelu05lf256.apps.googleusercontent.com',
           ),
-        ),
+        ],
       );
 } // AuthenticationScreen

@@ -21,6 +21,11 @@ dependencies:
   freezed_annotation: ^2.0.1
   shared_preferences: ^2.0.13
   url_launcher: ^6.1.0
+  firebase: ^9.0.2
+  firebase_core: ^1.16.0
+  firebase_analytics: ^9.1.7
+  firebase_auth: ^3.3.17
+  flutterfire_ui: ^0.4.0+5
 
 dev_dependencies:
   flutter_test:

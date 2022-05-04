@@ -15,13 +15,6 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Home'),
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.settings),
-              onPressed: () => SettingsRoute().go(context),
-            ),
-            const SizedBox(width: 12),
-          ],
         ),
         body: SafeArea(
           child: ListView(
@@ -37,6 +30,16 @@ class HomeScreen extends StatelessWidget {
                   onTap: () => FavoritesRoute().go(context),
                   leading: const Icon(Icons.favorite),
                   title: const Text('Favorities'),
+                ),
+                ListTile(
+                  onTap: () => SettingsRoute().go(context),
+                  leading: const Icon(Icons.settings),
+                  title: const Text('Settings'),
+                ),
+                ListTile(
+                  onTap: () => ProfileRoute().go(context),
+                  leading: const Icon(Icons.manage_accounts),
+                  title: const Text('Profile'),
                 ),
               ],
             ).toList(growable: false),
