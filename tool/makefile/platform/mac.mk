@@ -8,6 +8,7 @@ _echo_os:
 _setup:
 	@brew update
 	@brew install coreutils
+	@brew install node
 
 codegen:
 	@nohup /bin/bash -c ' \

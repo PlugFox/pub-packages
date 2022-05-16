@@ -82,11 +82,11 @@ class _$InitializationProgressCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$InitializationProgressCopyWith<$Res>
+abstract class _$$_InitializationProgressCopyWith<$Res>
     implements $InitializationProgressCopyWith<$Res> {
-  factory _$InitializationProgressCopyWith(_InitializationProgress value,
-          $Res Function(_InitializationProgress) then) =
-      __$InitializationProgressCopyWithImpl<$Res>;
+  factory _$$_InitializationProgressCopyWith(_$_InitializationProgress value,
+          $Res Function(_$_InitializationProgress) then) =
+      __$$_InitializationProgressCopyWithImpl<$Res>;
   @override
   $Res call(
       {String message,
@@ -96,15 +96,16 @@ abstract class _$InitializationProgressCopyWith<$Res>
 }
 
 /// @nodoc
-class __$InitializationProgressCopyWithImpl<$Res>
+class __$$_InitializationProgressCopyWithImpl<$Res>
     extends _$InitializationProgressCopyWithImpl<$Res>
-    implements _$InitializationProgressCopyWith<$Res> {
-  __$InitializationProgressCopyWithImpl(_InitializationProgress _value,
-      $Res Function(_InitializationProgress) _then)
-      : super(_value, (v) => _then(v as _InitializationProgress));
+    implements _$$_InitializationProgressCopyWith<$Res> {
+  __$$_InitializationProgressCopyWithImpl(_$_InitializationProgress _value,
+      $Res Function(_$_InitializationProgress) _then)
+      : super(_value, (v) => _then(v as _$_InitializationProgress));
 
   @override
-  _InitializationProgress get _value => super._value as _InitializationProgress;
+  _$_InitializationProgress get _value =>
+      super._value as _$_InitializationProgress;
 
   @override
   $Res call({
@@ -113,7 +114,7 @@ class __$InitializationProgressCopyWithImpl<$Res>
     Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
-    return _then(_InitializationProgress(
+    return _then(_$_InitializationProgress(
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -162,8 +163,8 @@ class _$_InitializationProgress extends _InitializationProgress {
 
   @JsonKey(ignore: true)
   @override
-  _$InitializationProgressCopyWith<_InitializationProgress> get copyWith =>
-      __$InitializationProgressCopyWithImpl<_InitializationProgress>(
+  _$$_InitializationProgressCopyWith<_$_InitializationProgress> get copyWith =>
+      __$$_InitializationProgressCopyWithImpl<_$_InitializationProgress>(
           this, _$identity);
 }
 
@@ -186,7 +187,7 @@ abstract class _InitializationProgress extends InitializationProgress {
   List<Package>? get packages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$InitializationProgressCopyWith<_InitializationProgress> get copyWith =>
+  _$$_InitializationProgressCopyWith<_$_InitializationProgress> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -236,38 +237,38 @@ class _$RepositoryStoreCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$RepositoryStoreCopyWith<$Res>
+abstract class _$$_RepositoryStoreCopyWith<$Res>
     implements $RepositoryStoreCopyWith<$Res> {
-  factory _$RepositoryStoreCopyWith(
-          _RepositoryStore value, $Res Function(_RepositoryStore) then) =
-      __$RepositoryStoreCopyWithImpl<$Res>;
+  factory _$$_RepositoryStoreCopyWith(
+          _$_RepositoryStore value, $Res Function(_$_RepositoryStore) then) =
+      __$$_RepositoryStoreCopyWithImpl<$Res>;
   @override
   $Res call({SharedPreferences sharedPreferences, List<Package> packages});
 }
 
 /// @nodoc
-class __$RepositoryStoreCopyWithImpl<$Res>
+class __$$_RepositoryStoreCopyWithImpl<$Res>
     extends _$RepositoryStoreCopyWithImpl<$Res>
-    implements _$RepositoryStoreCopyWith<$Res> {
-  __$RepositoryStoreCopyWithImpl(
-      _RepositoryStore _value, $Res Function(_RepositoryStore) _then)
-      : super(_value, (v) => _then(v as _RepositoryStore));
+    implements _$$_RepositoryStoreCopyWith<$Res> {
+  __$$_RepositoryStoreCopyWithImpl(
+      _$_RepositoryStore _value, $Res Function(_$_RepositoryStore) _then)
+      : super(_value, (v) => _then(v as _$_RepositoryStore));
 
   @override
-  _RepositoryStore get _value => super._value as _RepositoryStore;
+  _$_RepositoryStore get _value => super._value as _$_RepositoryStore;
 
   @override
   $Res call({
     Object? sharedPreferences = freezed,
     Object? packages = freezed,
   }) {
-    return _then(_RepositoryStore(
+    return _then(_$_RepositoryStore(
       sharedPreferences: sharedPreferences == freezed
           ? _value.sharedPreferences
           : sharedPreferences // ignore: cast_nullable_to_non_nullable
               as SharedPreferences,
       packages: packages == freezed
-          ? _value.packages
+          ? _value._packages
           : packages // ignore: cast_nullable_to_non_nullable
               as List<Package>,
     ));
@@ -299,22 +300,22 @@ class _$_RepositoryStore implements _RepositoryStore {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RepositoryStore &&
+            other is _$_RepositoryStore &&
             const DeepCollectionEquality()
                 .equals(other.sharedPreferences, sharedPreferences) &&
-            const DeepCollectionEquality().equals(other.packages, packages));
+            const DeepCollectionEquality().equals(other._packages, _packages));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(sharedPreferences),
-      const DeepCollectionEquality().hash(packages));
+      const DeepCollectionEquality().hash(_packages));
 
   @JsonKey(ignore: true)
   @override
-  _$RepositoryStoreCopyWith<_RepositoryStore> get copyWith =>
-      __$RepositoryStoreCopyWithImpl<_RepositoryStore>(this, _$identity);
+  _$$_RepositoryStoreCopyWith<_$_RepositoryStore> get copyWith =>
+      __$$_RepositoryStoreCopyWithImpl<_$_RepositoryStore>(this, _$identity);
 }
 
 abstract class _RepositoryStore implements RepositoryStore {
@@ -328,6 +329,6 @@ abstract class _RepositoryStore implements RepositoryStore {
   List<Package> get packages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$RepositoryStoreCopyWith<_RepositoryStore> get copyWith =>
+  _$$_RepositoryStoreCopyWith<_$_RepositoryStore> get copyWith =>
       throw _privateConstructorUsedError;
 }
