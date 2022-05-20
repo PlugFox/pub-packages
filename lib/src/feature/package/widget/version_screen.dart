@@ -52,7 +52,8 @@ class VersionScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text('Version: ${version.version}'),
-                        Text('Published: ${_dateFormater.format(version.published)}'),
+                        Text(
+                            'Published: ${_dateFormater.format(version.published)}'),
                         Text('SDK: ${version.pubspec.environment?.sdk ?? ''}'),
                         const Divider(),
                         Text(version.pubspec.description ?? ''),
@@ -73,7 +74,9 @@ class VersionScreen extends StatelessWidget {
                   ]
                       .whereType<String>()
                       .map<Widget>(Text.new)
-                      .map<Widget>((e) => Padding(padding: const EdgeInsets.symmetric(horizontal: 12), child: e))
+                      .map<Widget>((e) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: e))
                       .toList(growable: false),
                 ),
               ),
@@ -88,7 +91,8 @@ class VersionScreen extends StatelessWidget {
                   child: Center(
                     child: ElevatedButton(
                       onPressed: () => launcher.launchUrl(
-                        Uri.parse('https://pub.dev/packages/${package.name}/versions/${version.version}'),
+                        Uri.parse(
+                            'https://pub.dev/packages/${package.name}/versions/${version.version}'),
                       ),
                       child: const Text('Open on pub.dev'),
                     ),

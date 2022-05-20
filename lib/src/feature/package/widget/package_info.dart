@@ -63,7 +63,8 @@ class _PackageInfoHeader extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () => launcher.launchUrl(
-                    Uri.parse('https://pub.dev/packages/${PackageScope.of(context).name}'),
+                    Uri.parse(
+                        'https://pub.dev/packages/${PackageScope.of(context).name}'),
                   ),
                   child: const Text('Open on pub.dev'),
                 ),

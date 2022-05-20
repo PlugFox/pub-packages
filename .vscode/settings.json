@@ -1,0 +1,35 @@
+{
+    "[dart]" : {
+      "editor.defaultFormatter" : "Dart-Code.dart-code",
+      "editor.formatOnSave" : true,
+      "editor.formatOnType" : true,
+      "editor.formatOnPaste" : true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+      },
+      "editor.rulers" : [
+        120
+      ],
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+      "pubspec.yaml": ".flutter-plugins, .packages, .dart_tool, .flutter-plugins-dependencies, .metadata, .packages, pubspec.lock, build.yaml, analysis_options.yaml, all_lint_rules.yaml, flutter_*.yaml, icons_launcher.yaml",
+      ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+      "readme.*": "authors, backers.md, changelog*, citation*, code_of_conduct.md, codeowners, contributing.md, contributors, copying, credits, governance.md, history.md, license*, maintainers, readme*, security.md, sponsors.md",
+      "*.dart": "$(capture).g.dart, $(capture).freezed.dart, $(capture).config.dart",
+      "*.graphql": "$(capture).gql.dart, $(capture).*.gql.dart",
+      "schema.graphql": "schema.schema.gql.dart",
+      "firebase.json": ".firebaserc"
+    },
+    "dart.lineLength": 120,
+    "dart.doNotFormat": [
+      "**.g.dart",
+      "**.gql.dart",
+      "**.freezed.dart",
+      "**.config.dart",
+      "**.mocks.dart",
+      "**.gen.dart"
+    ]
+}

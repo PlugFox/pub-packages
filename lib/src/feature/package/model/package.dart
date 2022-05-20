@@ -18,7 +18,8 @@ class Package {
   });
 
   @override
-  String toString() => 'Package(name: $name, latest: $latest, versions: $versions)';
+  String toString() =>
+      'Package(name: $name, latest: $latest, versions: $versions)';
 
   factory Package.fromMap(Map<String, Object?> data) => Package(
         name: data['name']! as String,
@@ -38,7 +39,8 @@ class Package {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Package].
-  factory Package.fromJson(String data) => Package.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Package.fromJson(String data) =>
+      Package.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///

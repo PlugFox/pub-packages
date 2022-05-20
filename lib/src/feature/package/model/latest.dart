@@ -14,7 +14,8 @@ class Latest extends Version {
   });
 
   @override
-  String toString() => 'Latest(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
+  String toString() =>
+      'Latest(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
 
   factory Latest.fromMap(Map<String, dynamic> data) {
     final version = Version.fromMap(data);
@@ -26,7 +27,8 @@ class Latest extends Version {
     );
   }
 
-  factory Latest.fromJson(String data) => Latest.fromMap(json.decode(data) as Map<String, Object?>);
+  factory Latest.fromJson(String data) =>
+      Latest.fromMap(json.decode(data) as Map<String, Object?>);
 
   @override
   bool operator ==(Object other) {
@@ -37,5 +39,9 @@ class Latest extends Version {
   }
 
   @override
-  int get hashCode => version.hashCode ^ pubspec.hashCode ^ archiveUrl.hashCode ^ published.hashCode;
+  int get hashCode =>
+      version.hashCode ^
+      pubspec.hashCode ^
+      archiveUrl.hashCode ^
+      published.hashCode;
 }
