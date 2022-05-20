@@ -3,8 +3,6 @@ import 'package:pub_packages/src/common/router/app_router.dart';
 import 'package:pub_packages/src/common/widget/material_context.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorites_scope.dart';
-import 'package:pub_packages/src/feature/initialization/model/repository_store.dart';
-import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_scope.dart';
 
 /// {@template app}
@@ -13,22 +11,15 @@ import 'package:pub_packages/src/feature/settings/widget/settings_scope.dart';
 class App extends StatelessWidget {
   /// {@macro app}
   const App({
-    required RepositoryStore repositoryStore,
     Key? key,
-  })  : _repositoryStore = repositoryStore,
-        super(key: key);
-
-  final RepositoryStore _repositoryStore;
+  }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => RepositoryScope(
-        repositoryStore: _repositoryStore,
-        child: const AuthenticationScope(
-          child: SettingsScope(
-            child: FavoritesScope(
-              child: AppRouter(
-                child: MaterialContext(),
-              ),
+  Widget build(BuildContext context) => const AuthenticationScope(
+        child: SettingsScope(
+          child: FavoritesScope(
+            child: AppRouter(
+              child: MaterialContext(),
             ),
           ),
         ),

@@ -5,7 +5,16 @@ targets:
       - lib/**
       - pubspec.yaml
       - test/**
-    builders:
+    builders:  
+      injectable_generator:injectable_builder:  
+        options:  
+          auto_register: false  
+          # auto registers any class with a name matches the given pattern  
+          class_name_pattern:  
+            "Service$|Repository$|Bloc$"  
+            # auto registers any class inside a file with a  
+            # name matches the given pattern  
+          file_name_pattern: "_service$|_repository$|_bloc$"  
       json_serializable:
         enabled: true
         generate_for:

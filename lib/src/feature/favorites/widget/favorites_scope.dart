@@ -3,10 +3,11 @@ import 'package:collection/collection.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get_it/get_it.dart';
 import 'package:l/l.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
-import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
+import 'package:pub_packages/src/feature/packages/data/packages_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template favorites_scope.favorites_scope_controller}",
@@ -37,7 +38,9 @@ class FavoritesScope extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `FavoritesScope.maybeOf(context)`
   static FavoritesScopeController? maybeOf(BuildContext context) {
-    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedFavoritesScope>()?.widget;
+    final inhW = context
+        .getElementForInheritedWidgetOfExactType<_InheritedFavoritesScope>()
+        ?.widget;
     return inhW is _InheritedFavoritesScope ? inhW.controller : null;
   }
 
@@ -50,35 +53,46 @@ class FavoritesScope extends StatefulWidget {
   /// The state from the closest instance of this class
   /// that encloses the given context.
   /// e.g. `FavoritesScope.of(context)`
-  static FavoritesScopeController of(BuildContext context) => maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
+  static FavoritesScopeController of(BuildContext context) =>
+      maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
   State<FavoritesScope> createState() => _FavoritesScopeState();
 } // FavoritesScope
 
 /// State for widget FavoritesScope
-class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesScopeController {
+class _FavoritesScopeState extends State<FavoritesScope>
+    implements FavoritesScopeController {
   static const String _kFavorites = 'favorites';
   late final List<Package> _packages;
   late final SharedPreferences _sharedPreferences;
   late final DocumentReference<Map<String, Object?>>? _remoteFavorites;
-  final ValueNotifier<List<Package>> _notifier = ValueNotifier<List<Package>>(<Package>[]);
+  final ValueNotifier<List<Package>> _notifier =
+      ValueNotifier<List<Package>>(<Package>[]);
 
   /* #region Lifecycle */
   @override
   void initState() {
     super.initState();
-    _sharedPreferences = RepositoryScope.of(context).sharedPreferences;
-    _packages = RepositoryScope.of(context).packages;
+    _sharedPreferences = GetIt.instance<SharedPreferences>();
+    _packages = GetIt.instance<IPackagesRepository>().getPackages();
     final uid = AuthenticationScope.of(context).user?.uid;
     if (uid != null) {
-      _remoteFavorites = FirebaseFirestore.instance.collection('users').doc(uid).collection(_kFavorites).doc('latest')
+      _remoteFavorites = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection(_kFavorites)
+          .doc('latest')
         ..get().then<void>(
           (value) {
             if (!value.exists) return;
-            final list = (value.data()?['packages'] as List<Object?>?)?.whereType<String>().toList(growable: false);
+            final list = (value.data()?['packages'] as List<Object?>?)
+                ?.whereType<String>()
+                .toList(growable: false);
             if (list == null) return;
-            _sharedPreferences.setStringList(_kFavorites, list).whenComplete(_updateNotifier);
+            _sharedPreferences
+                .setStringList(_kFavorites, list)
+                .whenComplete(_updateNotifier);
             l.i('Favorites restored from firestore');
           },
           onError: l.w,
@@ -101,7 +115,8 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
 
   @override
   bool getPackageState(String packageName) =>
-      _sharedPreferences.getStringList(_kFavorites)?.contains(packageName) ?? false;
+      _sharedPreferences.getStringList(_kFavorites)?.contains(packageName) ??
+      false;
 
   @override
   Future<bool> togglePackageState(String packageName) {
@@ -135,7 +150,10 @@ class _FavoritesScopeState extends State<FavoritesScope> implements FavoritesSco
   void _updateNotifier() {
     final newList = _sharedPreferences
             .getStringList(_kFavorites)
-            ?.map<Package?>((name) => _packages.firstWhereOrNull((package) => package.name == name))
+            ?.map<Package?>(
+              (name) =>
+                  _packages.firstWhereOrNull((package) => package.name == name),
+            )
             .whereType<Package>()
             .toList() ??
         <Package>[];

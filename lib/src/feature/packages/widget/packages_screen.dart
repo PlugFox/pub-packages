@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
+import 'package:get_it/get_it.dart';
+import 'package:pub_packages/src/feature/packages/data/packages_repository.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_list_view.dart';
 
 /// {@template packages_screen.packages_screen}
@@ -20,7 +21,7 @@ class PackagesScreen extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: PackagesListView(
-              packages: RepositoryScope.of(context).packages,
+              packages: GetIt.instance<IPackagesRepository>().getPackages(),
             ),
           ),
         ),

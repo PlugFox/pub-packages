@@ -6,6 +6,7 @@ analyzer:
     - 'lib/**.gen.dart'
     - 'lib/**.g.dart'
     - 'lib/**.freezed.dart'
+    - 'lib/**.config.dart'
     # Build
     - 'build/**'
     # Tests

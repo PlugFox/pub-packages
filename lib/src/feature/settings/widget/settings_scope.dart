@@ -3,9 +3,9 @@ import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:l/l.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_scope.dart';
-import 'package:pub_packages/src/feature/initialization/widget/repository_scope.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// {@template settings_scope.settings_scope_controller}",
@@ -36,7 +36,9 @@ class SettingsScope extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `SettingsScope.maybeOf(context)`
   static SettingsScopeController? maybeOf(BuildContext context) {
-    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedSettingsScope>()?.widget;
+    final inhW = context
+        .getElementForInheritedWidgetOfExactType<_InheritedSettingsScope>()
+        ?.widget;
     return inhW is _InheritedSettingsScope ? inhW.controller : null;
   }
 
@@ -49,18 +51,21 @@ class SettingsScope extends StatefulWidget {
   /// The state from the closest instance of this class
   /// that encloses the given context.
   /// e.g. `SettingsScope.of(context)`
-  static SettingsScopeController of(BuildContext context) => maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
+  static SettingsScopeController of(BuildContext context) =>
+      maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
   State<SettingsScope> createState() => _SettingsScopeState();
 } // SettingsScope
 
 /// State for widget SettingsScope
-class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeController {
+class _SettingsScopeState extends State<SettingsScope>
+    implements SettingsScopeController {
   static const String _kThemeKey = 'theme';
   late final SharedPreferences _sharedPreferences;
   late final DocumentReference<Map<String, Object?>>? _remoteSettings;
-  final ValueNotifier<ThemeData> _themeNotifier = ValueNotifier<ThemeData>(ThemeData.light());
+  final ValueNotifier<ThemeData> _themeNotifier =
+      ValueNotifier<ThemeData>(ThemeData.light());
 
   @override
   ValueListenable<ThemeData> get themeData => _themeNotifier;
@@ -69,10 +74,14 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
   @override
   void initState() {
     super.initState();
-    _sharedPreferences = RepositoryScope.of(context).sharedPreferences;
+    _sharedPreferences = GetIt.instance<SharedPreferences>();
     final uid = AuthenticationScope.of(context).user?.uid;
     if (uid != null) {
-      _remoteSettings = FirebaseFirestore.instance.collection('users').doc(uid).collection('settings').doc('latest')
+      _remoteSettings = FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .collection('settings')
+          .doc('latest')
         ..get().then<void>(
           (value) {
             if (!value.exists) return;
@@ -97,14 +106,20 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
   /* #endregion */
 
   ThemeData _restoreTheme() {
-    final theme = _sharedPreferences.getBool(_kThemeKey) ?? ui.window.platformBrightness == ui.Brightness.light;
+    final theme = _sharedPreferences.getBool(_kThemeKey) ??
+        ui.window.platformBrightness == ui.Brightness.light;
     return _themeNotifier.value = theme ? ThemeData.light() : ThemeData.dark();
   }
 
   void _setTheme(ThemeData themeData) {
-    _sharedPreferences.setBool(_kThemeKey, themeData.brightness == Brightness.light);
+    _sharedPreferences.setBool(
+      _kThemeKey,
+      themeData.brightness == Brightness.light,
+    );
     _themeNotifier.value = themeData;
-    _remoteSettings?.set(<String, Object?>{_kThemeKey: themeData.brightness == Brightness.light});
+    _remoteSettings?.set(<String, Object?>{
+      _kThemeKey: themeData.brightness == Brightness.light
+    });
   }
 
   @override

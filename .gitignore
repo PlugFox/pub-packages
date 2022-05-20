@@ -32,6 +32,7 @@
 .pub/
 **/build/
 pubspec.lock
+.fvm/flutter_sdk
 
 # Web related
 client/lib/generated_plugin_registrant.dart

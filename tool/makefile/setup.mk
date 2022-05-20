@@ -6,8 +6,8 @@ setup: _setup
 	@flutter pub get
 	@grind setup
 	@npm install -g firebase-tools
-	@firebase init
 	-firebase login
+	@firebase init
 	@flutter pub global activate intl_utils
 	@dart pub global activate flutterfire_cli
 	@flutterfire configure \
