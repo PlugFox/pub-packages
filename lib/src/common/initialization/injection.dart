@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
-import 'package:pub_packages/src/common/data/injection.config.dart';
+import 'package:pub_packages/src/common/initialization/injection.config.dart';
 
 @InjectableInit(
   asExtension: true,
@@ -10,14 +10,14 @@ import 'package:pub_packages/src/common/data/injection.config.dart';
   usesNullSafety: true,
   // ignoreUnregisteredTypes: [],
 )
-Future<GetIt> initializeApp(
+Future<GetIt> injectDependencies(
   GetIt getIt, {
-  String? env,
+  String? environment,
   EnvironmentFilter? environmentFilter,
 }) async {
   l.d('_initializeApp');
   final container = await getIt.$initGetIt(
-    environment: env,
+    environment: environment,
     environmentFilter: environmentFilter,
   );
   await container.allReady(timeout: const Duration(seconds: 15));

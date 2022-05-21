@@ -28,9 +28,9 @@ class PackageVersions extends StatelessWidget {
                     ),
                     trailing: Text(_dateFormater.format(e.published)),
                     onTap: () => VersionRoute(
-                            name: PackageScope.of(context).name,
-                            version: e.version)
-                        .go(context),
+                      name: PackageScope.of(context).name,
+                      version: e.version,
+                    ).go(context),
                   ),
                 ),
           ).toList(growable: false),
