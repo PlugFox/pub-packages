@@ -47,7 +47,7 @@ class _PackagesScreenState extends State<PackagesScreen> with TickerProviderStat
   @override
   void didUpdateWidget(PackagesScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.tab != oldWidget.tab) {
+    if (widget.tab != oldWidget.tab && widget.tab != null) {
       _controller.animateTo(_currentTab);
     }
   }

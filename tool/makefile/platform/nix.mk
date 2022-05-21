@@ -1,4 +1,4 @@
-.PHONY: codegen
+.PHONY: codegen codegen!
 
 CFLAGS += -D nix
 
@@ -9,8 +9,11 @@ _setup:
 	@sudo apt update
 	@sudo apt install beep
 
-codegen:
+codegen!:
 	@nohup /bin/bash -c ' \
 		timeout 60 flutter pub get \
 		&& timeout 300 flutter pub run build_runner build --delete-conflicting-outputs \
 		&& beep -l 250 -f 250 || beep -f 400 -l 500 -r 2' >/dev/null 2>&1 &
+
+codegen: get
+	@flutter pub run build_runner build --delete-conflicting-outputs

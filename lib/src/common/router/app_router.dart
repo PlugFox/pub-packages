@@ -63,7 +63,7 @@ mixin AppRouterController on State<AppRouter> implements IAppRouterController {
     //final repositoryStore = RepositoryScope.of(context);
     final authController = AuthenticationScope.of(context);
     router = GoRouter(
-      restorationScopeId: 'go_router',
+      restorationScopeId: 'router',
       initialLocation: const HomeRoute().location,
       refreshListenable: authController.authenticationNotifier,
       redirect: (state) {

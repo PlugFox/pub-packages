@@ -64,7 +64,7 @@ class PackagesRoute extends GoRouteData {
   final String? tab;
 
   @override
-  Widget build(BuildContext context) => const PackagesScreen();
+  Widget build(BuildContext context) => PackagesScreen(tab: tab);
 }
 
 /// PackageRoute

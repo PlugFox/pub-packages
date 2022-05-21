@@ -1,4 +1,4 @@
-.PHONY: codegen
+.PHONY: codegen codegen!
 
 CFLAGS += -D osx
 
@@ -10,11 +10,11 @@ _setup:
 	@brew install coreutils
 	@brew install node
 
-codegen:
+codegen!:
 	@nohup /bin/bash -c ' \
 		gtimeout 60 flutter pub get \
 		&& gtimeout 300 flutter pub run build_runner build --delete-conflicting-outputs \
 		&& say "Code generation completed" || say "Code generation failed!" ' >/dev/null 2>&1 &
 
-codegen!:
+codegen: get
 	@flutter pub run build_runner build --delete-conflicting-outputs

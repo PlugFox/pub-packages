@@ -1,4 +1,4 @@
-.PHONY: codegen
+.PHONY: codegen codegen!
 
 CFLAGS += -D win
 
@@ -8,6 +8,7 @@ _echo_os:
 _setup:
 	@echo "Placeholder for Windows setup"
 
-codegen:
-	@flutter pub get
+codegen!: get
 	@flutter pub run build_runner build --delete-conflicting-outputs
+
+codegen: codegen
