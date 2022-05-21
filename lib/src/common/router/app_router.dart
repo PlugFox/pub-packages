@@ -27,9 +27,7 @@ class AppRouter extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `AppRouter.maybeOf(context)`
   static IAppRouterController? maybeOf(BuildContext context) {
-    final inhW = context
-        .getElementForInheritedWidgetOfExactType<_InheritedAppRouter>()
-        ?.widget;
+    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedAppRouter>()?.widget;
     return inhW is _InheritedAppRouter ? inhW.controller : null;
   }
 
@@ -42,8 +40,7 @@ class AppRouter extends StatefulWidget {
   /// The state from the closest instance of this class
   /// that encloses the given context.
   /// e.g. `AppRouter.of(context)`
-  static IAppRouterController of(BuildContext context) =>
-      maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
+  static IAppRouterController of(BuildContext context) => maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
   State<AppRouter> createState() => _AppRouterState();
@@ -87,13 +84,33 @@ mixin AppRouterController on State<AppRouter> implements IAppRouterController {
         return null;
       },
       routes: $appRoutes,
-      errorBuilder: (context, state) =>
-          NotFoundRoute(exception: state.error).build(context),
+      errorBuilder: (context, state) => NotFoundRoute(exception: state.error).build(context),
       //redirect: (state) => ,
       observers: <NavigatorObserver>[
         FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
       ],
+      navigatorBuilder: (context, state, child) => Stack(
+        children: <Widget>[
+          Positioned.fill(child: child),
+          Positioned(
+            bottom: 12,
+            height: 12,
+            left: 12,
+            right: 12,
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                state.location,
+                maxLines: 1,
+                style: Theme.of(context).textTheme.overline,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
+    //router.routerDelegate.builderWithNav;
   }
 
   @override

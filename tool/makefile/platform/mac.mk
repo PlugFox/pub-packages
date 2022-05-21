@@ -15,3 +15,6 @@ codegen:
 		gtimeout 60 flutter pub get \
 		&& gtimeout 300 flutter pub run build_runner build --delete-conflicting-outputs \
 		&& say "Code generation completed" || say "Code generation failed!" ' >/dev/null 2>&1 &
+
+codegen!:
+	@flutter pub run build_runner build --delete-conflicting-outputs

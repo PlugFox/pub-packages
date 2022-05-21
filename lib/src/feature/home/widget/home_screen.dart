@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          title: Text(context.findAncestorWidgetOfExactType<MaterialApp>()?.title ?? 'Home'),
           centerTitle: true,
         ),
         body: SafeArea(
@@ -25,11 +25,6 @@ class HomeScreen extends StatelessWidget {
                   onTap: () => PackagesRoute().go(context),
                   leading: const Icon(Icons.library_books),
                   title: const Text('Packages'),
-                ),
-                ListTile(
-                  onTap: () => FavoritesRoute().go(context),
-                  leading: const Icon(Icons.favorite),
-                  title: const Text('Favorities'),
                 ),
                 ListTile(
                   onTap: () => SettingsRoute().go(context),

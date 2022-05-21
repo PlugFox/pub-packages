@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_screen.dart';
-import 'package:pub_packages/src/feature/favorites/widget/favorites_screen.dart';
 import 'package:pub_packages/src/feature/home/widget/home_screen.dart';
 import 'package:pub_packages/src/feature/not_found/widget/not_found_screen.dart';
 import 'package:pub_packages/src/feature/package/widget/package_screen.dart';
@@ -39,9 +38,6 @@ part 'routes.g.dart';
         ),
       ],
     ),
-    TypedGoRoute<FavoritesRoute>(
-      path: 'favorites',
-    ),
   ],
 )
 class HomeRoute extends GoRouteData {
@@ -63,7 +59,9 @@ class AuthenticationRoute extends GoRouteData {
 /// PackagesRoute
 @internal
 class PackagesRoute extends GoRouteData {
-  PackagesRoute();
+  PackagesRoute({this.tab});
+
+  final String? tab;
 
   @override
   Widget build(BuildContext context) => const PackagesScreen();
@@ -72,15 +70,15 @@ class PackagesRoute extends GoRouteData {
 /// PackageRoute
 @internal
 class PackageRoute extends GoRouteData {
-  PackageRoute({required this.name});
+  PackageRoute({
+    required this.name,
+  });
 
   final String name;
 
   @override
   Widget build(BuildContext context) {
-    final package = GetIt.instance<IPackagesRepository>()
-        .getPackages()
-        .firstWhereOrNull((e) => e.name == name);
+    final package = GetIt.instance<IPackagesRepository>().getPackages().firstWhereOrNull((e) => e.name == name);
     if (package == null) {
       return const NotFoundScreen();
     }
@@ -91,29 +89,21 @@ class PackageRoute extends GoRouteData {
 /// VersionRoute
 @internal
 class VersionRoute extends GoRouteData {
-  VersionRoute({required this.name, required this.version});
+  VersionRoute({
+    required this.name,
+    required this.version,
+  });
 
   final String name;
   final String version;
 
   @override
   Widget build(BuildContext context) {
-    final pck = GetIt.instance<IPackagesRepository>()
-        .getPackages()
-        .firstWhereOrNull((e) => e.name == name);
+    final pck = GetIt.instance<IPackagesRepository>().getPackages().firstWhereOrNull((e) => e.name == name);
     final ver = pck?.versions.firstWhereOrNull((e) => e.version == version);
     if (pck == null || ver == null) return const NotFoundScreen();
     return VersionScreen(package: pck, version: ver);
   }
-}
-
-/// FavoritesRoute
-@internal
-class FavoritesRoute extends GoRouteData {
-  FavoritesRoute();
-
-  @override
-  Widget build(BuildContext context) => const FavoritesScreen();
 }
 
 /// SettingsRoute
