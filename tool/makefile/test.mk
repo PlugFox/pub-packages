@@ -1,4 +1,4 @@
-.PHONY: test coverage check fix format
+.PHONY: test coverage check
 
 test: get
 	@dart test --concurrency=6 --platform vm --coverage=coverage test/all_test.dart
@@ -10,10 +10,4 @@ coverage: test
 check:
 	@dart format --set-exit-if-changed .
 	@dart analyze --fatal-infos --fatal-warnings .
-	@pana --json --no-warning --line-length 80
-
-fix: format
-
-format:
-	@dart fix --apply .
-	@dart format -l 80 --fix .
+	@pana --json --no-warning --line-length 120

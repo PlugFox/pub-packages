@@ -23,8 +23,7 @@ class Environment {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Environment].
-  factory Environment.fromJson(String data) =>
-      Environment.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Environment.fromJson(String data) => Environment.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///

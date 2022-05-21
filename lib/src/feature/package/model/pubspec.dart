@@ -38,9 +38,8 @@ class Pubspec {
         name: data['name'] as String?,
         version: data['version'] as String?,
         homepage: data['homepage'] as String?,
-        environment: data['environment'] == null
-            ? null
-            : Environment.fromMap(data['environment'] as Map<String, dynamic>),
+        environment:
+            data['environment'] == null ? null : Environment.fromMap(data['environment'] as Map<String, dynamic>),
         description: data['description'] as String?,
         dependencies: data['dependencies'] == null
             ? null
@@ -71,8 +70,7 @@ class Pubspec {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Pubspec].
-  factory Pubspec.fromJson(String data) =>
-      Pubspec.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Pubspec.fromJson(String data) => Pubspec.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///

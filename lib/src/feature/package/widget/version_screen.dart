@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:pub_packages/src/feature/package/model/version.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
-
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 final DateFormat _dateFormater = DateFormat.yMMMEd();
@@ -53,7 +52,8 @@ class VersionScreen extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text('Version: ${version.version}'),
                         Text(
-                            'Published: ${_dateFormater.format(version.published)}'),
+                          'Published: ${_dateFormater.format(version.published)}',
+                        ),
                         Text('SDK: ${version.pubspec.environment?.sdk ?? ''}'),
                         const Divider(),
                         Text(version.pubspec.description ?? ''),
@@ -74,9 +74,12 @@ class VersionScreen extends StatelessWidget {
                   ]
                       .whereType<String>()
                       .map<Widget>(Text.new)
-                      .map<Widget>((e) => Padding(
+                      .map<Widget>(
+                        (e) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: e))
+                          child: e,
+                        ),
+                      )
                       .toList(growable: false),
                 ),
               ),
@@ -92,7 +95,8 @@ class VersionScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () => launcher.launchUrl(
                         Uri.parse(
-                            'https://pub.dev/packages/${package.name}/versions/${version.version}'),
+                          'https://pub.dev/packages/${package.name}/versions/${version.version}',
+                        ),
                       ),
                       child: const Text('Open on pub.dev'),
                     ),

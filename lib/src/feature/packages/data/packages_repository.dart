@@ -15,8 +15,7 @@ abstract class IPackagesRepository {
 @Singleton(as: IPackagesRepository)
 class PackagesRepositoryImpl implements IPackagesRepository {
   /// {@macro packages_repository}
-  const PackagesRepositoryImpl({required IPackagesCache cache})
-      : _cache = cache;
+  const PackagesRepositoryImpl({required IPackagesCache cache}) : _cache = cache;
 
   final IPackagesCache _cache;
 

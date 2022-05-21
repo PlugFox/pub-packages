@@ -23,8 +23,7 @@ class Dependencies {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Dependencies].
-  factory Dependencies.fromJson(String data) =>
-      Dependencies.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Dependencies.fromJson(String data) => Dependencies.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///

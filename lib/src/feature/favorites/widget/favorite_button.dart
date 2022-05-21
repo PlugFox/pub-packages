@@ -23,22 +23,19 @@ class FavoriteButton extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               firstChild: const Icon(Icons.favorite, color: Colors.red),
               secondChild: const Icon(Icons.favorite_border),
-              crossFadeState:
-                  favorites.map<String>((e) => e.name).contains(packageName)
-                      ? CrossFadeState.showFirst
-                      : CrossFadeState.showSecond,
+              crossFadeState: favorites.map<String>((e) => e.name).contains(packageName)
+                  ? CrossFadeState.showFirst
+                  : CrossFadeState.showSecond,
             ),
           ),
-          onPressed: () => FavoritesScope.of(context)
-              .togglePackageState(packageName)
-              .then<void>(
+          onPressed: () => FavoritesScope.of(context).togglePackageState(packageName).then<void>(
                 (value) => ScaffoldMessenger.maybeOf(context)
                   ?..clearSnackBars()
                   ..showSnackBar(
                     SnackBar(
-                      content: Text(value
-                          ? 'Added "$packageName" to favorites'
-                          : 'Removed "$packageName" from favorites'),
+                      content: Text(
+                        value ? 'Added "$packageName" to favorites' : 'Removed "$packageName" from favorites',
+                      ),
                     ),
                   ),
               ),

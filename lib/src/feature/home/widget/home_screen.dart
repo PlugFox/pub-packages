@@ -13,7 +13,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text(context.findAncestorWidgetOfExactType<MaterialApp>()?.title ?? 'Home'),
+          title: Text(
+            context.findAncestorWidgetOfExactType<MaterialApp>()?.title ?? 'Home',
+          ),
           centerTitle: true,
         ),
         body: SafeArea(

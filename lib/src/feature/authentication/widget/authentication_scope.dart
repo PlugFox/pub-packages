@@ -31,10 +31,7 @@ class AuthenticationScope extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `AuthenticationScope.maybeOf(context)`
   static AuthenticationScopeController? maybeOf(BuildContext context) {
-    final inhW = context
-        .getElementForInheritedWidgetOfExactType<
-            _InheritedAuthenticationScope>()
-        ?.widget;
+    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedAuthenticationScope>()?.widget;
     return inhW is _InheritedAuthenticationScope ? inhW.controller : null;
   }
 
@@ -55,16 +52,14 @@ class AuthenticationScope extends StatefulWidget {
 } // AuthenticationScope
 
 /// State for widget AuthenticationScope
-class _AuthenticationScopeState extends State<AuthenticationScope>
-    implements AuthenticationScopeController {
+class _AuthenticationScopeState extends State<AuthenticationScope> implements AuthenticationScopeController {
   late final StreamSubscription<User?> _sub;
   User? _user;
   @override
   User? get user => _user;
   @override
   bool get loggedIn => user != null;
-  final ValueNotifier<User?> _authenticationNotifier =
-      ValueNotifier<User?>(null);
+  final ValueNotifier<User?> _authenticationNotifier = ValueNotifier<User?>(null);
 
   @override
   ValueListenable<User?> get authenticationNotifier => _authenticationNotifier;
@@ -116,6 +111,5 @@ class _InheritedAuthenticationScope extends InheritedWidget {
   final User? user;
 
   @override
-  bool updateShouldNotify(_InheritedAuthenticationScope oldWidget) =>
-      user?.uid != oldWidget.user?.uid;
+  bool updateShouldNotify(_InheritedAuthenticationScope oldWidget) => user?.uid != oldWidget.user?.uid;
 } // _InheritedAuthenticationScope

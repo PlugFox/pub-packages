@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:pub_packages/src/feature/favorites/widget/favorite_button.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
 import 'package:pub_packages/src/feature/package/widget/package_versions.dart';
-
 import 'package:url_launcher/url_launcher.dart' as launcher;
 
 /// {@template package_info.package_info}
@@ -64,7 +62,8 @@ class _PackageInfoHeader extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () => launcher.launchUrl(
                     Uri.parse(
-                        'https://pub.dev/packages/${PackageScope.of(context).name}'),
+                      'https://pub.dev/packages/${PackageScope.of(context).name}',
+                    ),
                   ),
                   child: const Text('Open on pub.dev'),
                 ),

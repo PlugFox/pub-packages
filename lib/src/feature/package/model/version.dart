@@ -19,8 +19,7 @@ class Version {
   final DateTime published;
 
   @override
-  String toString() =>
-      'Version(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
+  String toString() => 'Version(version: $version, pubspec: $pubspec, archiveUrl: $archiveUrl, published: $published)';
 
   factory Version.fromMap(Map<String, dynamic> data) => Version(
         version: data['version']! as String,
@@ -39,8 +38,7 @@ class Version {
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Version].
-  factory Version.fromJson(String data) =>
-      Version.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Version.fromJson(String data) => Version.fromMap(json.decode(data) as Map<String, dynamic>);
 
   /// `dart:convert`
   ///
@@ -56,9 +54,5 @@ class Version {
   }
 
   @override
-  int get hashCode =>
-      version.hashCode ^
-      pubspec.hashCode ^
-      archiveUrl.hashCode ^
-      published.hashCode;
+  int get hashCode => version.hashCode ^ pubspec.hashCode ^ archiveUrl.hashCode ^ published.hashCode;
 }

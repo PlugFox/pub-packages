@@ -46,22 +46,21 @@ class ThemeSwitcher extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark
-          ? IconButton(
-              icon: const Icon(Icons.nightlight),
-              padding: EdgeInsets.zero,
-              iconSize: size,
-              tooltip: 'Switch to light theme',
-              onPressed: () => SettingsScope.of(context).setLightTheme(),
-            )
-          : IconButton(
-              icon: const Icon(Icons.sunny),
-              padding: EdgeInsets.zero,
-              iconSize: size,
-              tooltip: 'Switch to dark theme',
-              onPressed: () => SettingsScope.of(context).setDarkTheme(),
-            );
+  Widget build(BuildContext context) => Theme.of(context).brightness == Brightness.dark
+      ? IconButton(
+          icon: const Icon(Icons.nightlight),
+          padding: EdgeInsets.zero,
+          iconSize: size,
+          tooltip: 'Switch to light theme',
+          onPressed: () => SettingsScope.of(context).setLightTheme(),
+        )
+      : IconButton(
+          icon: const Icon(Icons.sunny),
+          padding: EdgeInsets.zero,
+          iconSize: size,
+          tooltip: 'Switch to dark theme',
+          onPressed: () => SettingsScope.of(context).setDarkTheme(),
+        );
 } // ThemeSwitcher
 
 /// {@template custom_progress_indicator}
@@ -82,13 +81,11 @@ class CustomProgressIndicator extends StatefulWidget {
   final Widget? child;
 
   @override
-  State<CustomProgressIndicator> createState() =>
-      _CustomProgressIndicatorState();
+  State<CustomProgressIndicator> createState() => _CustomProgressIndicatorState();
 } // CustomProgressIndicator
 
 /// State for widget CustomProgressIndicator
-class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
-    with SingleTickerProviderStateMixin {
+class _CustomProgressIndicatorState extends State<CustomProgressIndicator> with SingleTickerProviderStateMixin {
   late final AnimationController _sweepController;
   late final Animation<double> _curvedAnimation;
 

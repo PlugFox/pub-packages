@@ -18,8 +18,7 @@ class ProfileScreen extends StatelessWidget {
         ),
         providerConfigs: const <flutterfire_ui.ProviderConfiguration>[
           flutterfire_ui.GoogleProviderConfiguration(
-            clientId:
-                '789908936604-5q9bp96ecv8bhe8pr8rcjuelu05lf256.apps.googleusercontent.com',
+            clientId: '789908936604-5q9bp96ecv8bhe8pr8rcjuelu05lf256.apps.googleusercontent.com',
           ),
         ],
       );
