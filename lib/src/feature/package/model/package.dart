@@ -9,7 +9,7 @@ class Package with _$Package {
   const factory Package({
     required String name,
     required LatestVersion latest,
-    required List<Version> versions,
+    required List<PreviousVersion> versions,
   }) = _Package;
 
   factory Package.fromJson(Map<String, dynamic> json) => _$PackageFromJson(json);

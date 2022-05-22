@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -48,6 +35,39 @@
     <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
     <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt=""/>
   </picture>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+
+  <!-- Add SDKs for Firebase products that you want to use
+      https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-performance.js"></script>-->
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-remote-config.js"></script>-->
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>-->
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>-->
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"></script>-->
+  <!--<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-functions.js"></script>-->
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAAkyzDI3F3ECpRncXIMiFRelkeSZk8Afg",
+      authDomain: "pub-packages.firebaseapp.com",
+      projectId: "pub-packages",
+      storageBucket: "pub-packages.appspot.com",
+      messagingSenderId: "789908936604",
+      appId: "1:789908936604:web:268da6da4c8f8bd9dfda59",
+      measurementId: "G-5ECD6BX2RZ"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

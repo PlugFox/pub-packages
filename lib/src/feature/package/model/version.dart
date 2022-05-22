@@ -10,19 +10,19 @@ part 'version.g.dart';
 class Version with _$Version {
   const Version._();
 
-  const factory Version({
-    required String version,
-    required Pubspec pubspec,
-    required String published,
-    @JsonKey(name: 'archive_url') required String archiveUrl,
-  }) = _Version;
-
   const factory Version.latest({
     required String version,
     required Pubspec pubspec,
     required String published,
     @JsonKey(name: 'archive_url') required String archiveUrl,
   }) = LatestVersion;
+
+  const factory Version({
+    required String version,
+    required Pubspec pubspec,
+    required String published,
+    @JsonKey(name: 'archive_url') required String archiveUrl,
+  }) = PreviousVersion;
 
   DateTime get publishedDate => DateTime.parse(published);
 
