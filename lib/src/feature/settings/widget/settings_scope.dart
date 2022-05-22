@@ -36,7 +36,9 @@ class SettingsScope extends StatefulWidget {
   /// that encloses the given context, if any.
   /// e.g. `SettingsScope.maybeOf(context)`
   static SettingsScopeController? maybeOf(BuildContext context) {
-    final inhW = context.getElementForInheritedWidgetOfExactType<_InheritedSettingsScope>()?.widget;
+    final inhW = context
+        .getElementForInheritedWidgetOfExactType<_InheritedSettingsScope>()
+        ?.widget;
     return inhW is _InheritedSettingsScope ? inhW.controller : null;
   }
 
@@ -49,18 +51,21 @@ class SettingsScope extends StatefulWidget {
   /// The state from the closest instance of this class
   /// that encloses the given context.
   /// e.g. `SettingsScope.of(context)`
-  static SettingsScopeController of(BuildContext context) => maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
+  static SettingsScopeController of(BuildContext context) =>
+      maybeOf(context) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
   State<SettingsScope> createState() => _SettingsScopeState();
 } // SettingsScope
 
 /// State for widget SettingsScope
-class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeController {
+class _SettingsScopeState extends State<SettingsScope>
+    implements SettingsScopeController {
   static const String _kThemeKey = 'theme';
   late final SharedPreferences _sharedPreferences;
   late final DocumentReference<Map<String, Object?>>? _remoteSettings;
-  final ValueNotifier<ThemeData> _themeNotifier = ValueNotifier<ThemeData>(ThemeData.light());
+  final ValueNotifier<ThemeData> _themeNotifier =
+      ValueNotifier<ThemeData>(ThemeData.light());
 
   @override
   ValueListenable<ThemeData> get themeData => _themeNotifier;
@@ -72,18 +77,21 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
     _sharedPreferences = GetIt.instance<SharedPreferences>();
     final uid = AuthenticationScope.of(context).user?.uid;
     if (uid != null) {
-      _remoteSettings =
-          GetIt.instance<FirebaseFirestore>().collection('users').doc(uid).collection('settings').doc('latest')
-            ..get().then<void>(
-              (value) {
-                if (!value.exists) return;
-                final theme = value.data()?[_kThemeKey] as bool?;
-                if (theme == null) return;
-                theme ? setLightTheme() : setDarkTheme();
-                l.i('Settings restored from firestore');
-              },
-              onError: l.w,
-            );
+      _remoteSettings = GetIt.instance<FirebaseFirestore>()
+          .collection('users')
+          .doc(uid)
+          .collection('settings')
+          .doc('latest')
+        ..get().then<void>(
+          (value) {
+            if (!value.exists) return;
+            final theme = value.data()?[_kThemeKey] as bool?;
+            if (theme == null) return;
+            theme ? setLightTheme() : setDarkTheme();
+            l.i('Settings restored from firestore');
+          },
+          onError: l.w,
+        );
     } else {
       _remoteSettings = null;
     }
@@ -98,7 +106,8 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
   /* #endregion */
 
   ThemeData _restoreTheme() {
-    final theme = _sharedPreferences.getBool(_kThemeKey) ?? ui.window.platformBrightness == ui.Brightness.light;
+    final theme = _sharedPreferences.getBool(_kThemeKey) ??
+        ui.window.platformBrightness == ui.Brightness.light;
     return _themeNotifier.value = theme ? ThemeData.light() : ThemeData.dark();
   }
 
@@ -108,7 +117,9 @@ class _SettingsScopeState extends State<SettingsScope> implements SettingsScopeC
       themeData.brightness == Brightness.light,
     );
     _themeNotifier.value = themeData;
-    _remoteSettings?.set(<String, Object?>{_kThemeKey: themeData.brightness == Brightness.light});
+    _remoteSettings?.set(<String, Object?>{
+      _kThemeKey: themeData.brightness == Brightness.light
+    });
   }
 
   @override

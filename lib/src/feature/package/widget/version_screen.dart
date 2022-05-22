@@ -52,9 +52,9 @@ class VersionScreen extends StatelessWidget {
                         const SizedBox(height: 4),
                         Text('Version: ${version.version}'),
                         Text(
-                          'Published: ${_dateFormater.format(version.published)}',
+                          'Published: ${_dateFormater.format(version.publishedDate)}',
                         ),
-                        Text('SDK: ${version.pubspec.environment?.sdk ?? ''}'),
+                        Text('SDK: ${version.pubspec.environment?.sdk ?? 'unknown'}'),
                         const Divider(),
                         Text(version.pubspec.description ?? ''),
                         const Divider(),

@@ -78,7 +78,9 @@ class PackageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context) {
-    final package = GetIt.instance<IPackagesRepository>().getPackages().firstWhereOrNull((e) => e.name == name);
+    final package = GetIt.instance<IPackagesRepository>()
+        .getPackages()
+        .firstWhereOrNull((e) => e.name == name);
     if (package == null) {
       return const NotFoundScreen();
     }
@@ -99,7 +101,9 @@ class VersionRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context) {
-    final pck = GetIt.instance<IPackagesRepository>().getPackages().firstWhereOrNull((e) => e.name == name);
+    final pck = GetIt.instance<IPackagesRepository>()
+        .getPackages()
+        .firstWhereOrNull((e) => e.name == name);
     final ver = pck?.versions.firstWhereOrNull((e) => e.version == version);
     if (pck == null || ver == null) return const NotFoundScreen();
     return VersionScreen(package: pck, version: ver);

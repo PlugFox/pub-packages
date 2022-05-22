@@ -11,7 +11,8 @@ abstract class RegisteredModules {
   ///
   /// Data is persisted to disk asynchronously.
   @preResolve
-  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
+  Future<SharedPreferences> get sharedPreferences =>
+      SharedPreferences.getInstance();
 
   /// Firebase Authentication SDK
   FirebaseAuth get firebaseAuthentication => FirebaseAuth.instance;

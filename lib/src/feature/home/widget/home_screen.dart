@@ -14,7 +14,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            context.findAncestorWidgetOfExactType<MaterialApp>()?.title ?? 'Home',
+            context.findAncestorWidgetOfExactType<MaterialApp>()?.title ??
+                'Home',
           ),
           centerTitle: true,
         ),

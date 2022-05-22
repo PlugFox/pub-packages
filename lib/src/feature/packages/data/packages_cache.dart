@@ -50,7 +50,7 @@ class PackagesCache implements IPackagesCache {
 
   static List<Package> _decode(String json) {
     final decoded = jsonDecode(json) as List<Object?>;
-    final packages = decoded.cast<Map<String, Object?>>().map<Package>(Package.fromMap).toList(growable: false);
+    final packages = decoded.cast<Map<String, Object?>>().map<Package>(Package.fromJson).toList(growable: false);
     return packages
         .map<Package>(
           (e) => e..versions.sort((a, b) => b.published.compareTo(a.published)),

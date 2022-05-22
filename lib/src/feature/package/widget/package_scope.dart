@@ -19,9 +19,13 @@ class PackageScope extends InheritedWidget {
   /// e.g. `Package.maybeOf(context)`
   static Package? maybeOf(BuildContext context, {bool listen = false}) {
     if (listen) {
-      return context.dependOnInheritedWidgetOfExactType<PackageScope>()?.package;
+      return context
+          .dependOnInheritedWidgetOfExactType<PackageScope>()
+          ?.package;
     } else {
-      final inhW = context.getElementForInheritedWidgetOfExactType<PackageScope>()?.widget;
+      final inhW = context
+          .getElementForInheritedWidgetOfExactType<PackageScope>()
+          ?.widget;
       return inhW is PackageScope ? inhW.package : null;
     }
   }
@@ -39,5 +43,6 @@ class PackageScope extends InheritedWidget {
       maybeOf(context, listen: listen) ?? _notFoundInheritedWidgetOfExactType();
 
   @override
-  bool updateShouldNotify(PackageScope oldWidget) => package.name != oldWidget.package.name;
+  bool updateShouldNotify(PackageScope oldWidget) =>
+      package.name != oldWidget.package.name;
 } // PackageScope
