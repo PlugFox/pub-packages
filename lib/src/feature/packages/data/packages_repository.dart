@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:meta/meta.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:pub_packages/src/feature/packages/data/packages_cache.dart';
 
@@ -8,6 +9,7 @@ import 'package:pub_packages/src/feature/packages/data/packages_cache.dart';
 // ignore: one_member_abstracts
 abstract class IPackagesRepository {
   /// Get packages from list
+  @useResult
   List<Package> getPackages();
 } // PackagesRepository
 

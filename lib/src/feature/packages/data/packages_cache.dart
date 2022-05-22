@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
+import 'package:meta/meta.dart';
 import 'package:pub_packages/src/common/constant/assets.gen.dart';
 import 'package:pub_packages/src/common/constant/deployment_environment.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
@@ -14,6 +15,7 @@ import 'package:pub_packages/src/feature/package/model/package.dart';
 // ignore: one_member_abstracts
 abstract class IPackagesCache {
   /// Get packages from list
+  @useResult
   List<Package> getPackages();
 } // IPackagesCache
 

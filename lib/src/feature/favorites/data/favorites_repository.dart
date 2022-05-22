@@ -47,6 +47,13 @@ class FavoritesRepositoryImpl implements IFavoritesRepository {
       set.add(packageName);
       isFavorite = true;
     }
+    final items = <AnalyticsEventItem>[
+      AnalyticsEventItem(
+        itemId: packageName,
+        itemName: packageName,
+        itemBrand: 'PlugFox',
+      ),
+    ];
     return _getRemoteFavoritesRef(userId).set(
       <String, Object?>{_kFavorites: set.toList(growable: false)},
       SetOptions(
@@ -54,15 +61,9 @@ class FavoritesRepositoryImpl implements IFavoritesRepository {
       ),
     ).then<Set<String>>((value) {
       if (isFavorite) {
-        FirebaseAnalytics.instance.logAddToCart(
-          items: <AnalyticsEventItem>[
-            AnalyticsEventItem(
-              itemId: packageName,
-              itemName: packageName,
-              itemBrand: 'PlugFox',
-            ),
-          ],
-        );
+        FirebaseAnalytics.instance.logAddToCart(items: items);
+      } else {
+        FirebaseAnalytics.instance.logRemoveFromCart(items: items);
       }
       return getFavoritePackages(userId);
     });
