@@ -5,7 +5,7 @@ part 'dependencies.g.dart';
 
 @freezed
 class Dependencies with _$Dependencies {
-  factory Dependencies({
+  const factory Dependencies({
     String? meta,
   }) = _Dependencies;
 

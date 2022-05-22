@@ -17,6 +17,13 @@ class Version with _$Version {
     @JsonKey(name: 'archive_url') required String archiveUrl,
   }) = _Version;
 
+  const factory Version.latest({
+    required String version,
+    required Pubspec pubspec,
+    required String published,
+    @JsonKey(name: 'archive_url') required String archiveUrl,
+  }) = LatestVersion;
+
   DateTime get publishedDate => DateTime.parse(published);
 
   factory Version.fromJson(Map<String, dynamic> json) => _$VersionFromJson(json);

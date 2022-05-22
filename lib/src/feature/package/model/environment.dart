@@ -5,7 +5,7 @@ part 'environment.g.dart';
 
 @freezed
 class Environment with _$Environment {
-  factory Environment({
+  const factory Environment({
     required String sdk,
   }) = _Environment;
 

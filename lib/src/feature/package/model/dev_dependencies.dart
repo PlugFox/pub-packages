@@ -5,7 +5,7 @@ part 'dev_dependencies.g.dart';
 
 @freezed
 class DevDependencies with _$DevDependencies {
-  factory DevDependencies({
+  const factory DevDependencies({
     String? coverage,
     String? test,
   }) = _DevDependencies;

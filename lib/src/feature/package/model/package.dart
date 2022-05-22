@@ -6,9 +6,9 @@ part 'package.g.dart';
 
 @freezed
 class Package with _$Package {
-  factory Package({
+  const factory Package({
     required String name,
-    required Version latest,
+    required LatestVersion latest,
     required List<Version> versions,
   }) = _Package;
 

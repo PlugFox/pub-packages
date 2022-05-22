@@ -136,3 +136,4 @@ ios/firebase_app_id_file.json
 firestore.indexes.json
 firestore.rules
 *.g.dart
+*.freezed.dart

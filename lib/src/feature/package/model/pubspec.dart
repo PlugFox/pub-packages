@@ -10,7 +10,7 @@ part 'pubspec.g.dart';
 
 @freezed
 class Pubspec with _$Pubspec {
-  factory Pubspec({
+  const factory Pubspec({
     required String name,
     required String version,
     String? homepage,
