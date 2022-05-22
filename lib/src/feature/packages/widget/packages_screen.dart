@@ -90,12 +90,9 @@ class _PackagesScreenState extends State<PackagesScreen> with TickerProviderStat
                   packages: PackagesScope.packagesOf(context, listen: true),
                   onTap: _onPackageSelected,
                 ),
-                ValueListenableBuilder<List<Package>>(
-                  valueListenable: FavoritesScope.of(context).favorites,
-                  builder: (context, packages, _) => PackagesListView(
-                    packages: packages,
-                    onTap: _onPackageSelected,
-                  ),
+                PackagesListView(
+                  packages: FavoritesScope.favoritesOf(context, listen: true),
+                  onTap: _onPackageSelected,
                 ),
               ],
             ),

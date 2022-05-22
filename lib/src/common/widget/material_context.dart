@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/common/router/app_router.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_scope.dart';
@@ -44,6 +45,7 @@ class _MaterialContextState extends State<MaterialContext> {
         ],
         supportedLocales: const <Locale>[Locale('en', 'US')],
         locale: const Locale('en', 'US'),
+        scaffoldMessengerKey: GetIt.instance<GlobalKey<ScaffoldMessengerState>>(),
       ),
     );
   }

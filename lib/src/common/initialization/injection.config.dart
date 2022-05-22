@@ -7,15 +7,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart' as _i5;
 import 'package:firebase_analytics/firebase_analytics.dart' as _i3;
 import 'package:firebase_auth/firebase_auth.dart' as _i4;
+import 'package:flutter/material.dart' as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:pub_packages/src/common/initialization/registered_modules.dart'
-    as _i9;
-import 'package:pub_packages/src/feature/packages/data/packages_cache.dart'
-    as _i6;
-import 'package:pub_packages/src/feature/packages/data/packages_repository.dart'
+    as _i11;
+import 'package:pub_packages/src/feature/favorites/data/favorites_repository.dart'
     as _i7;
-import 'package:shared_preferences/shared_preferences.dart' as _i8;
+import 'package:pub_packages/src/feature/packages/data/packages_cache.dart'
+    as _i8;
+import 'package:pub_packages/src/feature/packages/data/packages_repository.dart'
+    as _i9;
+import 'package:shared_preferences/shared_preferences.dart' as _i10;
 
 const String _development = 'development';
 const String _staging = 'staging';
@@ -37,19 +40,23 @@ extension GetItInjectableX on _i1.GetIt {
         () => registeredModules.firebaseAuthentication);
     gh.factory<_i5.FirebaseFirestore>(
         () => registeredModules.firebaseFirestore);
-    gh.singletonAsync<_i6.IPackagesCache>(() => _i6.PackagesCache.getInstance(),
+    gh.factory<_i6.GlobalKey<_i6.ScaffoldMessengerState>>(
+        () => registeredModules.scaffoldMessengerKey);
+    gh.singleton<_i7.IFavoritesRepository>(
+        _i7.FavoritesRepositoryImpl(firestore: get<_i5.FirebaseFirestore>()));
+    gh.singletonAsync<_i8.IPackagesCache>(() => _i8.PackagesCache.getInstance(),
         registerFor: {_development, _staging, _production});
-    gh.singletonAsync<_i6.IPackagesCache>(
-        () => _i6.PackagesCacheFake.getInstance(),
+    gh.singletonAsync<_i8.IPackagesCache>(
+        () => _i8.PackagesCacheFake.getInstance(),
         registerFor: {_integration});
-    gh.singletonAsync<_i7.IPackagesRepository>(() async =>
-        _i7.PackagesRepositoryImpl(
-            cache: await getAsync<_i6.IPackagesCache>()));
-    await gh.factoryAsync<_i8.SharedPreferences>(
+    gh.singletonAsync<_i9.IPackagesRepository>(() async =>
+        _i9.PackagesRepositoryImpl(
+            cache: await getAsync<_i8.IPackagesCache>()));
+    await gh.factoryAsync<_i10.SharedPreferences>(
         () => registeredModules.sharedPreferences,
         preResolve: true);
     return this;
   }
 }
 
-class _$RegisteredModules extends _i9.RegisteredModules {}
+class _$RegisteredModules extends _i11.RegisteredModules {}

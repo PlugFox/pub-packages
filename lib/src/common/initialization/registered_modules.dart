@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,8 +12,7 @@ abstract class RegisteredModules {
   ///
   /// Data is persisted to disk asynchronously.
   @preResolve
-  Future<SharedPreferences> get sharedPreferences =>
-      SharedPreferences.getInstance();
+  Future<SharedPreferences> get sharedPreferences => SharedPreferences.getInstance();
 
   /// Firebase Authentication SDK
   FirebaseAuth get firebaseAuthentication => FirebaseAuth.instance;
@@ -22,4 +22,7 @@ abstract class RegisteredModules {
 
   /// The entry point for accessing a [FirebaseFirestore].
   FirebaseFirestore get firebaseFirestore => FirebaseFirestore.instance;
+
+  /// State for a [ScaffoldMessenger].
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 }

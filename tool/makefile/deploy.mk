@@ -1,4 +1,4 @@
-.PHONY: build deploy
+.PHONY: build deploy serve
 
 build: codegen
 	@flutter build web --release --no-source-maps --pwa-strategy offline-first \
@@ -6,3 +6,6 @@ build: codegen
 
 deploy: build
 	@firebase deploy
+
+serve: build
+	@firebase serve
