@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/feature/authentication/widget/authentication_screen.dart';
@@ -8,7 +7,7 @@ import 'package:pub_packages/src/feature/home/widget/home_screen.dart';
 import 'package:pub_packages/src/feature/not_found/widget/not_found_screen.dart';
 import 'package:pub_packages/src/feature/package/widget/package_screen.dart';
 import 'package:pub_packages/src/feature/package/widget/version_screen.dart';
-import 'package:pub_packages/src/feature/packages/data/packages_repository.dart';
+import 'package:pub_packages/src/feature/packages/widget/packages_scope.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_screen.dart';
 import 'package:pub_packages/src/feature/profile/widget/profile_screen.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_screen.dart';
@@ -78,9 +77,7 @@ class PackageRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context) {
-    final package = GetIt.instance<IPackagesRepository>()
-        .getPackages()
-        .firstWhereOrNull((e) => e.name == name);
+    final package = PackagesScope.packagesOf(context).firstWhereOrNull((e) => e.name == name);
     if (package == null) {
       return const NotFoundScreen();
     }
@@ -101,9 +98,7 @@ class VersionRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context) {
-    final pck = GetIt.instance<IPackagesRepository>()
-        .getPackages()
-        .firstWhereOrNull((e) => e.name == name);
+    final pck = PackagesScope.packagesOf(context).firstWhereOrNull((e) => e.name == name);
     final ver = pck?.versions.firstWhereOrNull((e) => e.version == version);
     if (pck == null || ver == null) return const NotFoundScreen();
     return VersionScreen(package: pck, version: ver);

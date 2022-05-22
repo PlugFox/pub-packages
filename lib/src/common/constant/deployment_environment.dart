@@ -1,22 +1,29 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
-abstract class Environments {
-  Environments._();
+@sealed
+abstract class DeploymentEnvironment {
+  DeploymentEnvironment._();
+
+  static const String integration = 'integration';
+  static const String development = 'development';
+  static const String staging = 'staging';
+  static const String production = 'production';
+
+  static const List<String> values = <String>[
+    integration,
+    development,
+    staging,
+    production,
+  ];
 
   static String? _current;
   static String get current => _current ??= () {
         const flavor = String.fromEnvironment('environment');
-        switch (flavor) {
-          case integration:
-            return integration;
-          case development:
-            return development;
-          case staging:
-            return staging;
-          case production:
-            return production;
-          default:
-            break;
+        final env = DeploymentEnvironment.values.firstWhereOrNull((e) => e == flavor);
+        if (env != null) {
+          return env;
         }
         if (kProfileMode) {
           return staging;
@@ -28,29 +35,9 @@ abstract class Environments {
         return integration;
       }();
 
-  static void setEnvironment(String environment) {
-    switch (environment) {
-      case integration:
-        _current = integration;
-        return;
-      case development:
-        _current = development;
-        return;
-      case staging:
-        _current = staging;
-        return;
-      case production:
-        _current = production;
-        return;
-      default:
-        break;
-    }
-  }
-
-  static const String integration = 'integration';
-  static const String development = 'development';
-  static const String staging = 'staging';
-  static const String production = 'production';
+  // ignore: use_setters_to_change_properties
+  static void setEnvironment(String environment) =>
+      _current = DeploymentEnvironment.values.firstWhereOrNull((e) => e == environment) ?? _current;
 
   static T map<T>({
     required T Function() integration,
@@ -59,16 +46,17 @@ abstract class Environments {
     required T Function() production,
   }) {
     switch (current) {
-      case Environments.integration:
+      case DeploymentEnvironment.integration:
         return integration();
-      case Environments.development:
+      case DeploymentEnvironment.development:
         return development();
-      case Environments.staging:
+      case DeploymentEnvironment.staging:
         return staging();
-      case Environments.production:
+      case DeploymentEnvironment.production:
         return production();
       default:
-        throw UnsupportedError('Unknown environment: $current');
+        assert(false, 'Unknown environment: $current');
+        return production();
     }
   }
 

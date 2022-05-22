@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:l/l.dart';
 import 'package:pub_packages/src/common/constant/assets.gen.dart';
-import 'package:pub_packages/src/common/constant/environments.dart';
+import 'package:pub_packages/src/common/constant/deployment_environment.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 
 /// {@template packages_cache}
@@ -22,9 +22,9 @@ abstract class IPackagesCache {
 @Singleton(
   as: IPackagesCache,
   env: <String>[
-    Environments.development,
-    Environments.staging,
-    Environments.production,
+    DeploymentEnvironment.development,
+    DeploymentEnvironment.staging,
+    DeploymentEnvironment.production,
   ],
 )
 class PackagesCache implements IPackagesCache {
@@ -62,7 +62,7 @@ class PackagesCache implements IPackagesCache {
 @Singleton(
   as: IPackagesCache,
   env: <String>[
-    Environments.integration,
+    DeploymentEnvironment.integration,
   ],
 )
 class PackagesCacheFake implements IPackagesCache {

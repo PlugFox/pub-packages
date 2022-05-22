@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorites_scope.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
-import 'package:pub_packages/src/feature/packages/data/packages_repository.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_list_view.dart';
+import 'package:pub_packages/src/feature/packages/widget/packages_scope.dart';
 
 /// {@template packages_screen}
 /// PackagesScreen widget
@@ -88,7 +87,7 @@ class _PackagesScreenState extends State<PackagesScreen> with TickerProviderStat
               controller: _controller,
               children: <Widget>[
                 PackagesListView(
-                  packages: GetIt.instance<IPackagesRepository>().getPackages(),
+                  packages: PackagesScope.packagesOf(context, listen: true),
                   onTap: _onPackageSelected,
                 ),
                 ValueListenableBuilder<List<Package>>(
