@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:pub_packages/src/feature/package/model/version.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
@@ -30,6 +31,9 @@ class VersionScreen extends StatelessWidget {
               SliverAppBar(
                 title: Text(package.name),
                 centerTitle: true,
+                actions: const <Widget>[
+                  LogoutButton(),
+                ],
               ),
               SliverToBoxAdapter(
                 child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorite_button.dart';
 import 'package:pub_packages/src/feature/package/widget/package_scope.dart';
 import 'package:pub_packages/src/feature/package/widget/package_versions.dart';
@@ -23,7 +24,7 @@ class PackageInfo extends StatelessWidget {
               FavoriteButton(
                 packageName: PackageScope.of(context).name,
               ),
-              const SizedBox(width: 12),
+              const LogoutButton(),
             ],
           ),
           const _PackageInfoHeader(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 
 /// {@template not_found_screen.not_found_screen}
 /// NotFoundScreen widget
@@ -18,6 +19,9 @@ class NotFoundScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Not Found'),
           centerTitle: true,
+          actions: const <Widget>[
+            LogoutButton(),
+          ],
         ),
         body: SafeArea(
           child: Center(

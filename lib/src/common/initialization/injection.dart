@@ -8,7 +8,6 @@ import 'package:pub_packages/src/common/initialization/injection.config.dart';
   initializerName: r'$initGetIt',
   preferRelativeImports: false,
   usesNullSafety: true,
-  // ignoreUnregisteredTypes: [],
 )
 Future<GetIt> injectDependencies(
   GetIt getIt, {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 import 'package:pub_packages/src/feature/favorites/widget/favorites_scope.dart';
 import 'package:pub_packages/src/feature/package/model/package.dart';
 import 'package:pub_packages/src/feature/packages/widget/packages_list_view.dart';
@@ -80,6 +81,9 @@ class _PackagesScreenState extends State<PackagesScreen> with TickerProviderStat
             tabs: PackagesScreen.tabs.map<Widget>((e) => Tab(text: e)).toList(growable: false),
             onTap: _onTabChanged,
           ),
+          actions: const <Widget>[
+            LogoutButton(),
+          ],
         ),
         body: SafeArea(
           child: Center(

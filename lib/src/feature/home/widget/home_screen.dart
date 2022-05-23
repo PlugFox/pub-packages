@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pub_packages/src/common/router/routes.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 
 /// {@template home_screen.home_screen}
 /// HomeScreen widget
@@ -14,10 +15,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            context.findAncestorWidgetOfExactType<MaterialApp>()?.title ??
-                'Home',
+            context.findAncestorWidgetOfExactType<MaterialApp>()?.title ?? 'Home',
           ),
           centerTitle: true,
+          actions: const <Widget>[
+            LogoutButton(),
+          ],
         ),
         body: SafeArea(
           child: ListView(

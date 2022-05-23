@@ -1,13 +1,14 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:pub_packages/src/common/widget/logout_button.dart';
 import 'package:pub_packages/src/feature/settings/widget/settings_scope.dart';
 
-/// {@template settings_screen.settings_screen}
+/// {@template settings_screen}
 /// SettingsScreen widget
 /// {@endtemplate}
 class SettingsScreen extends StatelessWidget {
-  /// {@macro settings_screen.settings_screen}
+  /// {@macro settings_screen}
   const SettingsScreen({
     Key? key,
   }) : super(key: key);
@@ -17,6 +18,9 @@ class SettingsScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Settings'),
           centerTitle: true,
+          actions: const <Widget>[
+            LogoutButton(),
+          ],
         ),
         body: const SafeArea(
           child: Center(
@@ -32,11 +36,11 @@ class SettingsScreen extends StatelessWidget {
       );
 } // SettingsScreen
 
-/// {@template main.main}
+/// {@template theme_switcher}
 /// ThemeSwitcher widget
 /// {@endtemplate}
 class ThemeSwitcher extends StatelessWidget {
-  /// {@macro main.main}
+  /// {@macro theme_switcher}
   const ThemeSwitcher({
     this.size = 64,
     Key? key,
@@ -46,22 +50,21 @@ class ThemeSwitcher extends StatelessWidget {
   final double size;
 
   @override
-  Widget build(BuildContext context) =>
-      Theme.of(context).brightness == Brightness.dark
-          ? IconButton(
-              icon: const Icon(Icons.nightlight),
-              padding: EdgeInsets.zero,
-              iconSize: size,
-              tooltip: 'Switch to light theme',
-              onPressed: () => SettingsScope.of(context).setLightTheme(),
-            )
-          : IconButton(
-              icon: const Icon(Icons.sunny),
-              padding: EdgeInsets.zero,
-              iconSize: size,
-              tooltip: 'Switch to dark theme',
-              onPressed: () => SettingsScope.of(context).setDarkTheme(),
-            );
+  Widget build(BuildContext context) => Theme.of(context).brightness == Brightness.dark
+      ? IconButton(
+          icon: const Icon(Icons.nightlight),
+          padding: EdgeInsets.zero,
+          iconSize: size,
+          tooltip: 'Switch to light theme',
+          onPressed: () => SettingsScope.of(context).setLightTheme(),
+        )
+      : IconButton(
+          icon: const Icon(Icons.sunny),
+          padding: EdgeInsets.zero,
+          iconSize: size,
+          tooltip: 'Switch to dark theme',
+          onPressed: () => SettingsScope.of(context).setDarkTheme(),
+        );
 } // ThemeSwitcher
 
 /// {@template custom_progress_indicator}
@@ -82,13 +85,11 @@ class CustomProgressIndicator extends StatefulWidget {
   final Widget? child;
 
   @override
-  State<CustomProgressIndicator> createState() =>
-      _CustomProgressIndicatorState();
+  State<CustomProgressIndicator> createState() => _CustomProgressIndicatorState();
 } // CustomProgressIndicator
 
 /// State for widget CustomProgressIndicator
-class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
-    with SingleTickerProviderStateMixin {
+class _CustomProgressIndicatorState extends State<CustomProgressIndicator> with SingleTickerProviderStateMixin {
   late final AnimationController _sweepController;
   late final Animation<double> _curvedAnimation;
 
